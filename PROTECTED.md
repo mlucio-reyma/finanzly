@@ -9,8 +9,14 @@
 
 ## 🔒 Módulos Protegidos
 
-*Este archivo está vacío mientras el proyecto está en fase inicial.*
-*Se irá llenando conforme se completen las features.*
+### Feature 001 — Auth [PROTEGIDO]
+**Completado:** 2026-03-05
+**Archivos protegidos:**
+- src/features/auth/**
+- src/components/ProtectedRoute.tsx
+- src/lib/supabase.ts
+- src/lib/database.types.ts
+**Notas:** Implementado y probado. Login, registro y rutas protegidas funcionando. No modificar sin revisión explícita.
 
 ---
 
