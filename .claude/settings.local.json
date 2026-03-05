@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx tsc -b --verbose)",
+      "Bash(npx tsc --noEmit --diagnostics)",
+      "Bash(npx tsc --noEmit --listFilesOnly)",
+      "Bash(npx tsc -p tsconfig.app.json --noEmit)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\migue\\.claude\\plans"
+    ]
+  }
+}

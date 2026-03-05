@@ -1,17 +1,44 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { LoginPage } from './features/auth/pages/LoginPage'
+import { RegisterPage } from './features/auth/pages/RegisterPage'
+import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
+import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
+import { ProtectedRoute } from './components/ProtectedRoute'
+
 function App() {
   return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <div className="card w-96 bg-base-100 shadow-xl">
-        <div className="card-body items-center text-center">
-          <h1 className="card-title text-3xl font-bold">Finanzly</h1>
-          <p className="text-base-content/70">Stack listo ✅</p>
-          <div className="card-actions mt-4">
-            <button className="btn btn-primary">Comenzar</button>
-            <button className="btn btn-ghost">Saber más</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* Rutas públicas */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+        {/* Rutas protegidas */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <div>Dashboard — próximamente</div>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Ruta raíz → login */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* Ruta 404 */}
+        <Route
+          path="*"
+          element={
+            <div className="min-h-screen flex items-center justify-center">
+              <h1 className="text-2xl">404 — Página no encontrada</h1>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
