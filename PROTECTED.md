@@ -37,6 +37,12 @@
 - src/features/recurring/**
 **Notas:** CRUD completo funcionando. Tablas recurring_payments y recurring_payments_log en Supabase con RLS activo. No modificar sin revisión explícita.
 
+### Feature 005 — Análisis Inteligente [PROTEGIDO]
+**Completado:** 2026-03-06
+**Archivos protegidos:**
+- src/features/analysis/**
+**Notas:** Motor de análisis, score de salud financiera y recomendaciones funcionando. No modificar sin revisión explícita.
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)
