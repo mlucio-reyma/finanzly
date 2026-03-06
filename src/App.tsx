@@ -4,8 +4,9 @@ import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
 import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import { ExpensesPage } from './features/expenses/pages/ExpensesPage'
-import { NewExpensePage } from './features/expenses/pages/NewExpensePage'
+import { ExpensesPage }   from './features/expenses/pages/ExpensesPage'
+import { NewExpensePage }  from './features/expenses/pages/NewExpensePage'
+import { DashboardPage }   from './features/dashboard/pages/DashboardPage'
 
 function App() {
   return (
@@ -22,10 +23,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <div className="p-8">
-                <h1 className="text-2xl font-bold mb-4">Dashboard — Finanzly</h1>
-                <a href="/expenses" className="btn btn-primary">Ver Gastos</a>
-              </div>
+              <DashboardPage />
             </ProtectedRoute>
           }
         />
@@ -46,8 +44,8 @@ function App() {
           }
         />
 
-        {/* Ruta raíz → login */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Ruta raíz → dashboard (ProtectedRoute redirige a /login si no hay sesión) */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
         {/* Ruta 404 */}
         <Route
