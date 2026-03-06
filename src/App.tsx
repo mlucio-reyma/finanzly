@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { ExpensesPage }   from './features/expenses/pages/ExpensesPage'
 import { NewExpensePage }  from './features/expenses/pages/NewExpensePage'
 import { DashboardPage }   from './features/dashboard/pages/DashboardPage'
+import { RecurringPage }   from './features/recurring/pages/RecurringPage'
 
 function App() {
   return (
@@ -40,6 +41,15 @@ function App() {
           element={
             <ProtectedRoute>
               <NewExpensePage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/recurring"
+          element={
+            <ProtectedRoute>
+              <RecurringPage />
             </ProtectedRoute>
           }
         />
