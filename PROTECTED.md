@@ -32,11 +32,10 @@
 **Notas:** Dashboard completo con gráficas Recharts funcionando. No modificar sin revisión explícita.
 
 ### Feature 004 — Pagos Recurrentes [PROTEGIDO]
-**Completado:** 2026-03-05
+**Completado:** 2026-03-06
 **Archivos protegidos:**
 - src/features/recurring/**
-- src/lib/database.types.ts
-**Notas:** CRUD completo de pagos recurrentes. Log mensual de pagos con creación automática de gasto en expenses al marcar como pagado. No modificar sin revisión explícita.
+**Notas:** CRUD completo funcionando. Tablas recurring_payments y recurring_payments_log en Supabase con RLS activo. No modificar sin revisión explícita.
 
 ---
 
