@@ -25,6 +25,12 @@
 - src/lib/database.types.ts
 **Notas:** CRUD completo funcionando. Tabla expenses en Supabase con RLS activo. No modificar sin revisión explícita.
 
+### Feature 003 — Dashboard & Visualizaciones [PROTEGIDO]
+**Completado:** 2026-03-06
+**Archivos protegidos:**
+- src/features/dashboard/**
+**Notas:** Dashboard completo con gráficas Recharts funcionando. No modificar sin revisión explícita.
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)
