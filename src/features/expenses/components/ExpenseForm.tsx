@@ -1,0 +1,203 @@
+import { useState } from 'react'
+import { CATEGORIES } from '../../../types/categories'
+import { useExpenses } from '../hooks/useExpenses'
+import type { Database } from '../../../lib/database.types'
+
+// ── Tipos ─────────────────────────────────────────────────────────────────────
+
+type ExpenseRow = Database['public']['Tables']['expenses']['Row']
+
+interface Props {
+  expense?: ExpenseRow  // Si se recibe, el formulario opera en modo edición
+  onSuccess: () => void
+  onCancel: () => void
+}
+
+// ── Constantes ────────────────────────────────────────────────────────────────
+
+const today = new Date().toISOString().split('T')[0]
+
+const PAYMENT_METHODS = [
+  { id: 'efectivo',      label: 'Efectivo' },
+  { id: 'debito',        label: 'Débito' },
+  { id: 'credito',       label: 'Crédito' },
+  { id: 'transferencia', label: 'Transferencia' },
+] as const
+
+const DESC_MAX = 200
+
+// ── Componente ────────────────────────────────────────────────────────────────
+
+export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
+  const { createExpense, updateExpense } = useExpenses()
+  const isEditing = !!expense
+
+  // ── Estado del formulario ─────────────────────────────────────────────────
+  const [amount, setAmount]           = useState(expense?.amount?.toString() ?? '')
+  const [category, setCategory]       = useState(expense?.category ?? CATEGORIES[0].id)
+  const [date, setDate]               = useState(expense?.date ?? today)
+  const [description, setDescription] = useState(expense?.description ?? '')
+  const [establishment, setEstablishment] = useState(expense?.establishment ?? '')
+  const [paymentMethod, setPaymentMethod] = useState(expense?.payment_method ?? 'efectivo')
+  const [formError, setFormError]     = useState<string | null>(null)
+  const [loading, setLoading]         = useState(false)
+
+  // ── Submit ────────────────────────────────────────────────────────────────
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setFormError(null)
+
+    const parsedAmount = parseFloat(amount)
+    if (isNaN(parsedAmount) || parsedAmount <= 0) {
+      setFormError('El monto debe ser un número positivo.')
+      return
+    }
+
+    const formData = {
+      amount: parsedAmount,
+      category,
+      date,
+      description: description.trim() || null,
+      establishment: establishment.trim() || null,
+      payment_method: paymentMethod,
+    }
+
+    setLoading(true)
+    const result = isEditing
+      ? await updateExpense(expense.id, formData)
+      : await createExpense(formData)
+    setLoading(false)
+
+    if (result.error) {
+      setFormError(result.error)
+      return
+    }
+
+    onSuccess()
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────────
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full" noValidate>
+
+      {/* Error general */}
+      {formError && (
+        <div role="alert" className="alert alert-error text-sm">
+          <span>{formError}</span>
+        </div>
+      )}
+
+      {/* Monto */}
+      <label className="form-control w-full">
+        <div className="label"><span className="label-text font-medium">Monto *</span></div>
+        <input
+          type="number"
+          inputMode="decimal"
+          step="0.01"
+          min="0.01"
+          required
+          placeholder="0.00"
+          className="input input-bordered w-full"
+          value={amount}
+          onChange={e => setAmount(e.target.value)}
+        />
+      </label>
+
+      {/* Categoría */}
+      <label className="form-control w-full">
+        <div className="label"><span className="label-text font-medium">Categoría *</span></div>
+        <select
+          required
+          className="select select-bordered w-full"
+          value={category}
+          onChange={e => setCategory(e.target.value)}
+        >
+          {CATEGORIES.map(cat => (
+            <option key={cat.id} value={cat.id}>
+              {cat.emoji} {cat.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* Fecha */}
+      <label className="form-control w-full">
+        <div className="label"><span className="label-text font-medium">Fecha *</span></div>
+        <input
+          type="date"
+          required
+          className="input input-bordered w-full"
+          value={date}
+          onChange={e => setDate(e.target.value)}
+        />
+      </label>
+
+      {/* Establecimiento */}
+      <label className="form-control w-full">
+        <div className="label"><span className="label-text font-medium">Establecimiento</span></div>
+        <input
+          type="text"
+          className="input input-bordered w-full"
+          placeholder="Ej: Walmart, Netflix, OXXO"
+          value={establishment}
+          onChange={e => setEstablishment(e.target.value)}
+        />
+      </label>
+
+      {/* Método de pago */}
+      <label className="form-control w-full">
+        <div className="label"><span className="label-text font-medium">Método de pago *</span></div>
+        <select
+          required
+          className="select select-bordered w-full"
+          value={paymentMethod}
+          onChange={e => setPaymentMethod(e.target.value)}
+        >
+          {PAYMENT_METHODS.map(pm => (
+            <option key={pm.id} value={pm.id}>{pm.label}</option>
+          ))}
+        </select>
+      </label>
+
+      {/* Descripción con contador */}
+      <label className="form-control w-full">
+        <div className="label">
+          <span className="label-text font-medium">Descripción</span>
+          <span className={`label-text-alt ${description.length >= DESC_MAX ? 'text-error' : 'text-base-content/50'}`}>
+            {description.length}/{DESC_MAX}
+          </span>
+        </div>
+        <textarea
+          className="textarea textarea-bordered w-full resize-none"
+          placeholder="Opcional..."
+          maxLength={DESC_MAX}
+          rows={3}
+          value={description}
+          onChange={e => setDescription(e.target.value)}
+        />
+      </label>
+
+      {/* Acciones */}
+      <div className="flex gap-3 pt-2">
+        <button
+          type="button"
+          className="btn btn-ghost flex-1"
+          onClick={onCancel}
+          disabled={loading}
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          className="btn btn-primary flex-1"
+          disabled={loading}
+          aria-busy={loading}
+        >
+          {loading && <span className="loading loading-spinner loading-sm" />}
+          {isEditing ? 'Guardar cambios' : 'Registrar gasto'}
+        </button>
+      </div>
+
+    </form>
+  )
+}
