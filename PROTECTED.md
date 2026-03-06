@@ -18,6 +18,13 @@
 - src/lib/database.types.ts
 **Notas:** Implementado y probado. Login, registro y rutas protegidas funcionando. No modificar sin revisión explícita.
 
+### Feature 002 — Gestión de Gastos [PROTEGIDO]
+**Completado:** 2026-03-06
+**Archivos protegidos:**
+- src/features/expenses/**
+- src/lib/database.types.ts
+**Notas:** CRUD completo funcionando. Tabla expenses en Supabase con RLS activo. No modificar sin revisión explícita.
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)
