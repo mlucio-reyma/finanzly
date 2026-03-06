@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CATEGORIES }    from '../../../types/categories'
-import { useRecurring }  from '../hooks/useRecurring'
+import type { RecurringFormData } from '../hooks/useRecurring'
 import type { Database } from '../../../lib/database.types'
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
@@ -8,9 +8,11 @@ import type { Database } from '../../../lib/database.types'
 type RecurringPaymentRow = Database['public']['Tables']['recurring_payments']['Row']
 
 interface Props {
-  recurring?: RecurringPaymentRow // si se recibe, modo edición
-  onSuccess: () => void
-  onCancel:  () => void
+  recurring?:       RecurringPaymentRow // si se recibe, modo edición
+  onSuccess:        () => void
+  onCancel:         () => void
+  createRecurring:  (data: RecurringFormData) => Promise<{ error: string | null }>
+  updateRecurring:  (id: string, data: Partial<RecurringFormData>) => Promise<{ error: string | null }>
 }
 
 // ── Constantes ────────────────────────────────────────────────────────────────
@@ -19,8 +21,7 @@ const REMINDER_OPTIONS = [1, 2, 3, 5, 7] as const
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-export function RecurringForm({ recurring, onSuccess, onCancel }: Props) {
-  const { createRecurring, updateRecurring } = useRecurring()
+export function RecurringForm({ recurring, onSuccess, onCancel, createRecurring, updateRecurring }: Props) {
   const isEditing = !!recurring
 
   // Estado del formulario

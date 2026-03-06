@@ -1,10 +1,18 @@
 import { useState }      from 'react'
+import { useRecurring }  from '../hooks/useRecurring'
 import { RecurringList } from '../components/RecurringList'
 import { RecurringForm } from '../components/RecurringForm'
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
 export function RecurringPage() {
+  const {
+    recurringPayments, paidThisMonth, totalMonthly,
+    loading, error,
+    createRecurring, updateRecurring, deleteRecurring,
+    toggleActive, markAsPaid, markAsUnpaid,
+  } = useRecurring()
+
   const [isFormOpen, setIsFormOpen] = useState(false)
 
   return (
@@ -24,7 +32,19 @@ export function RecurringPage() {
         </div>
 
         {/* Lista de pagos recurrentes */}
-        <RecurringList />
+        <RecurringList
+          recurringPayments={recurringPayments}
+          paidThisMonth={paidThisMonth}
+          totalMonthly={totalMonthly}
+          loading={loading}
+          error={error}
+          createRecurring={createRecurring}
+          updateRecurring={updateRecurring}
+          deleteRecurring={deleteRecurring}
+          toggleActive={toggleActive}
+          markAsPaid={markAsPaid}
+          markAsUnpaid={markAsUnpaid}
+        />
 
         {/* Modal de nuevo pago */}
         {isFormOpen && (
@@ -35,6 +55,8 @@ export function RecurringPage() {
               <RecurringForm
                 onSuccess={() => setIsFormOpen(false)}
                 onCancel={() => setIsFormOpen(false)}
+                createRecurring={createRecurring}
+                updateRecurring={updateRecurring}
               />
             </div>
           </div>

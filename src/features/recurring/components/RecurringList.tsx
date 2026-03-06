@@ -1,14 +1,28 @@
-import { useState } from 'react'
-import { useRecurring }        from '../hooks/useRecurring'
+import { useState }           from 'react'
 import { RecurringItem }       from './RecurringItem'
 import { RecurringForm }       from './RecurringForm'
 import { MonthlyCommittedCard } from './MonthlyCommittedCard'
 import { DeleteConfirmModal }  from '../../expenses/components/DeleteConfirmModal'
+import type { RecurringFormData } from '../hooks/useRecurring'
 import type { Database }       from '../../../lib/database.types'
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
 
 type RecurringPaymentRow = Database['public']['Tables']['recurring_payments']['Row']
+
+interface Props {
+  recurringPayments: RecurringPaymentRow[]
+  paidThisMonth:     Set<string>
+  totalMonthly:      number
+  loading:           boolean
+  error:             string | null
+  createRecurring:   (data: RecurringFormData) => Promise<{ error: string | null }>
+  updateRecurring:   (id: string, data: Partial<RecurringFormData>) => Promise<{ error: string | null }>
+  deleteRecurring:   (id: string) => Promise<{ error: string | null }>
+  toggleActive:      (id: string, active: boolean) => Promise<{ error: string | null }>
+  markAsPaid:        (id: string) => Promise<{ error: string | null }>
+  markAsUnpaid:      (id: string) => Promise<{ error: string | null }>
+}
 
 // ── Skeleton ──────────────────────────────────────────────────────────────────
 
@@ -31,15 +45,14 @@ function SkeletonRow() {
 
 // ── Componente ────────────────────────────────────────────────────────────────
 
-export function RecurringList() {
-  const {
-    recurringPayments, paidThisMonth, totalMonthly,
-    loading, error,
-    deleteRecurring, markAsPaid, markAsUnpaid,
-  } = useRecurring()
-
-  const [editingItem, setEditingItem]   = useState<RecurringPaymentRow | null>(null)
-  const [deletingId, setDeletingId]     = useState<string | null>(null)
+export function RecurringList({
+  recurringPayments, paidThisMonth, totalMonthly,
+  loading, error,
+  createRecurring, updateRecurring, deleteRecurring,
+  markAsPaid, markAsUnpaid,
+}: Props) {
+  const [editingItem, setEditingItem]     = useState<RecurringPaymentRow | null>(null)
+  const [deletingId, setDeletingId]       = useState<string | null>(null)
   const [deleteLoading, setDeleteLoading] = useState(false)
 
   // Separar activos de pausados (el hook ya los ordena por due_day)
@@ -125,6 +138,8 @@ export function RecurringList() {
               recurring={editingItem}
               onSuccess={() => setEditingItem(null)}
               onCancel={() => setEditingItem(null)}
+              createRecurring={createRecurring}
+              updateRecurring={updateRecurring}
             />
           </div>
         </div>
