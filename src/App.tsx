@@ -8,6 +8,7 @@ import { ExpensesPage }   from './features/expenses/pages/ExpensesPage'
 import { NewExpensePage }  from './features/expenses/pages/NewExpensePage'
 import { DashboardPage }   from './features/dashboard/pages/DashboardPage'
 import { RecurringPage }   from './features/recurring/pages/RecurringPage'
+import { AnalysisPage }   from './features/analysis/pages/AnalysisPage'
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
           element={
             <ProtectedRoute>
               <RecurringPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/analysis"
+          element={
+            <ProtectedRoute>
+              <AnalysisPage />
             </ProtectedRoute>
           }
         />

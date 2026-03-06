@@ -126,6 +126,32 @@ export interface Database {
           created_at?: string
         }
       }
+      monthly_scores: {
+        Row: {
+          id: string
+          user_id: string
+          month: string
+          score: number | null
+          factors: Record<string, number> | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          month: string
+          score?: number | null
+          factors?: Record<string, number> | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          month?: string
+          score?: number | null
+          factors?: Record<string, number> | null
+          created_at?: string
+        }
+      }
     }
   }
 }
