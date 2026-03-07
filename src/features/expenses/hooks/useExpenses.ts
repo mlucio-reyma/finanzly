@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../../../lib/supabase'
 import type { Database } from '../../../lib/database.types'
+import { useCategories } from '../../categories/hooks/useCategories'
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
 
@@ -50,6 +51,9 @@ function traducirError(message: string): string {
 // ── Hook principal ────────────────────────────────────────────────────────────
 
 export function useExpenses() {
+  // ── Categorías (predefinidas + custom del usuario) ──────────────────────────
+  const { allCategories } = useCategories()
+
   // ── Estado ─────────────────────────────────────────────────────────────────
   const [expenses, setExpenses] = useState<ExpenseRow[]>([])
   const [loading, setLoading] = useState(true)
@@ -223,6 +227,7 @@ export function useExpenses() {
   // ── API pública del hook ───────────────────────────────────────────────────
   return {
     expenses,
+    allCategories,
     loading,
     error,
     hasMore,

@@ -54,6 +54,12 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 - Recordatorios por email configurables: 1, 2, 3, 5 o 7 días antes del vencimiento
 - Toggle activo/inactivo para pausar sin perder el registro
 
+### 🏷️ Categorías Personalizadas
+- Crea tus propias categorías con nombre, emoji y color
+- Activa o desactiva categorías sin perder el registro
+- Las categorías activas aparecen en el formulario de gastos junto a las 12 predefinidas
+- Vista de administración con lista colapsable de categorías del sistema
+
 ### 🧠 Análisis Inteligente
 - **Score de salud financiera** (0–100) calculado mensualmente con histórico de 6 meses
 - **Detección de anomalías**: categorías donde gastas >20% más que tu promedio histórico
@@ -199,6 +205,25 @@ CREATE POLICY "Users can CRUD own recurring log"
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
+-- Tabla de categorías personalizadas
+CREATE TABLE custom_categories (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id) NOT NULL,
+  label TEXT NOT NULL CHECK (char_length(label) <= 30),
+  emoji TEXT NOT NULL,
+  color TEXT NOT NULL,
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_custom_categories_user_id ON custom_categories(user_id);
+
+ALTER TABLE custom_categories ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users can CRUD own custom categories"
+  ON custom_categories FOR ALL
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
+
 -- Cache de scores mensuales
 CREATE TABLE monthly_scores (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -239,7 +264,8 @@ src/
 │   ├── expenses/        # CRUD de gastos, filtros, lista
 │   ├── dashboard/       # Gráficas, métricas, resumen del mes
 │   ├── recurring/       # Pagos recurrentes y recordatorios
-│   └── analysis/        # Score, anomalías, recomendaciones
+│   ├── analysis/        # Score, anomalías, recomendaciones
+│   └── categories/      # CRUD de categorías personalizadas
 ├── lib/                 # Cliente de Supabase, utilidades
 └── types/               # TypeScript types globales, categorías
 ```
@@ -274,6 +300,7 @@ feature/
 | ✅ Dashboard con visualizaciones | Implementado |
 | ✅ Pagos recurrentes | Implementado |
 | ✅ Análisis inteligente (score + anomalías + recomendaciones) | Implementado |
+| ✅ Categorías personalizadas (CRUD + emoji + color) | Implementado |
 | 🔜 Recordatorios por email (Edge Functions) | Próximo |
 | 🔜 Exportar historial a CSV/PDF | Planeado |
 | 🔜 Modo multi-moneda (MXN, ARS, CLP, EUR...) | Planeado |

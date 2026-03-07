@@ -14,3 +14,13 @@ export const CATEGORIES = [
 ] as const
 
 export type CategoryId = typeof CATEGORIES[number]['id']
+
+export type CustomCategory = {
+  id: string
+  user_id: string
+  label: string
+  emoji: string
+  color: string
+  active: boolean
+  created_at: string
+}

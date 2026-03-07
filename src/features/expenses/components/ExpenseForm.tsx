@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { CATEGORIES } from '../../../types/categories'
 import { useExpenses } from '../hooks/useExpenses'
 import type { Database } from '../../../lib/database.types'
 
@@ -39,12 +38,12 @@ const DESC_MAX = 200
 // ── Componente ────────────────────────────────────────────────────────────────
 
 export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
-  const { createExpense, updateExpense } = useExpenses()
+  const { createExpense, updateExpense, allCategories } = useExpenses()
   const isEditing = !!expense
 
   // ── Estado del formulario ─────────────────────────────────────────────────
   const [amount, setAmount]           = useState(expense?.amount?.toString() ?? '')
-  const [category, setCategory]       = useState(expense?.category ?? CATEGORIES[0].id)
+  const [category, setCategory]       = useState(expense?.category ?? allCategories[0]?.value ?? 'alimentacion')
   const [date, setDate]               = useState(expense?.date ?? today)
   const [description, setDescription] = useState(expense?.description ?? '')
   const [establishment, setEstablishment] = useState(expense?.establishment ?? '')
@@ -122,11 +121,22 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
           value={category}
           onChange={e => setCategory(e.target.value)}
         >
-          {CATEGORIES.map(cat => (
-            <option key={cat.id} value={cat.id}>
-              {cat.emoji} {cat.label}
-            </option>
-          ))}
+          <optgroup label="Categorías">
+            {allCategories.filter(c => !c.isCustom).map(cat => (
+              <option key={cat.value} value={cat.value}>
+                {cat.emoji} {cat.label}
+              </option>
+            ))}
+          </optgroup>
+          {allCategories.some(c => c.isCustom) && (
+            <optgroup label="— Mis categorías —">
+              {allCategories.filter(c => c.isCustom).map(cat => (
+                <option key={cat.value} value={cat.value}>
+                  {cat.emoji} {cat.label}
+                </option>
+              ))}
+            </optgroup>
+          )}
         </select>
       </label>
 

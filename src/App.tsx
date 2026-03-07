@@ -9,7 +9,8 @@ import { ExpensesPage }  from './features/expenses/pages/ExpensesPage'
 import { NewExpensePage } from './features/expenses/pages/NewExpensePage'
 import { DashboardPage }  from './features/dashboard/pages/DashboardPage'
 import { RecurringPage }  from './features/recurring/pages/RecurringPage'
-import { AnalysisPage }   from './features/analysis/pages/AnalysisPage'
+import { AnalysisPage }    from './features/analysis/pages/AnalysisPage'
+import { CategoriesPage }  from './features/categories/pages/CategoriesPage'
 
 // AppLayout ya incluye Navigation internamente; Outlet renderiza la ruta hija activa.
 const PrivateLayout = () => (
@@ -41,6 +42,7 @@ function App() {
           <Route path="dashboard"    element={<DashboardPage />} />
           <Route path="expenses"     element={<ExpensesPage />} />
           <Route path="expenses/new" element={<NewExpensePage />} />
+          <Route path="categories"   element={<CategoriesPage />} />
           <Route path="recurring"    element={<RecurringPage />} />
           <Route path="analysis"     element={<AnalysisPage />} />
         </Route>

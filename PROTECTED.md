@@ -43,6 +43,13 @@
 - src/features/analysis/**
 **Notas:** Motor de análisis, score de salud financiera y recomendaciones funcionando. No modificar sin revisión explícita.
 
+### Feature 006 — Categorías CRUD [PROTEGIDO]
+**Completado:** 2026-03-06
+**Archivos protegidos:**
+- src/features/categories/**
+- src/types/categories.ts
+**Notas:** CRUD completo con emoji picker y color picker. Tabla custom_categories en Supabase con RLS activo. Integrada con ExpenseForm vía allCategories. No modificar sin revisión explícita.
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)
