@@ -34,7 +34,7 @@ export function CategoriesPage() {
 
   const [isFormOpen, setIsFormOpen]           = useState(false)
   const [editingCategory, setEditingCategory] = useState<CustomCategory | null>(null)
-  const [defaultsOpen, setDefaultsOpen]       = useState(false)
+  const [showDefault, setShowDefault]         = useState(false)
 
   const totalActive = allCategories.filter(c => c.isCustom ? categories.find(x => `custom_${x.id}` === c.value)?.active : true).length
 
@@ -108,25 +108,25 @@ export function CategoriesPage() {
       </section>
 
       {/* ── Sección: Predefinidas (colapsable) ─────────────────────────────── */}
-      <section>
+      <div>
         <button
           type="button"
           className="flex items-center justify-between w-full text-base font-semibold text-[#94A3B8] uppercase tracking-wide mb-3"
-          onClick={() => setDefaultsOpen(p => !p)}
-          aria-expanded={defaultsOpen}
+          onClick={() => setShowDefault(!showDefault)}
+          aria-expanded={showDefault}
         >
           <span>Predefinidas ({CATEGORIES.length})</span>
-          <span aria-hidden="true" className="text-xs">{defaultsOpen ? '▲' : '▼'}</span>
+          <span aria-hidden="true" className="text-xs">{showDefault ? '▲' : '▼'}</span>
         </button>
 
-        {defaultsOpen && (
+        {showDefault && (
           <div className="flex flex-col gap-3">
             {CATEGORIES.map(cat => (
               <DefaultCategoryItem key={cat.id} emoji={cat.emoji} label={cat.label} />
             ))}
           </div>
         )}
-      </section>
+      </div>
 
       {/* ── Modal: Formulario ───────────────────────────────────────────────── */}
       {isFormOpen && (

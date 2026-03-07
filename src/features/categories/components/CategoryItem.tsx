@@ -70,7 +70,7 @@ export function CategoryItem({ category, onEdit, onDelete, onToggle }: Props) {
         <label className="cursor-pointer" aria-label={category.active ? 'Desactivar categoría' : 'Activar categoría'}>
           <input
             type="checkbox"
-            className="toggle toggle-success toggle-sm"
+            className="toggle border-[#10B981] bg-[#10B981] checked:bg-[#10B981] checked:border-[#10B981] toggle-sm"
             checked={category.active}
             onChange={handleToggle}
             disabled={toggling}
