@@ -12,15 +12,19 @@ type ExpenseRow = Database['public']['Tables']['expenses']['Row']
 
 // Calcula la diferencia en días entre la fecha del gasto y hoy
 function relativeDate(dateStr: string): string {
-  const [y, m, d] = dateStr.split('-').map(Number)
-  const expDate   = new Date(y, m - 1, d)
-  const today     = new Date()
-  today.setHours(0, 0, 0, 0)
-  const diffDays  = Math.round((today.getTime() - expDate.getTime()) / 86_400_000)
+  const [year, month, day] = dateStr.split('-').map(Number)
+  const expenseDate = new Date(year, month - 1, day)
+  const today = new Date()
+  const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const diffTime = todayNormalized.getTime() - expenseDate.getTime()
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24))
 
   if (diffDays === 0) return 'Hoy'
   if (diffDays === 1) return 'Ayer'
-  return `Hace ${diffDays} días`
+  if (diffDays === -1) return 'Mañana'
+  if (diffDays > 1) return `Hace ${diffDays} días`
+  if (diffDays < -1) return `En ${Math.abs(diffDays)} días`
+  return 'Hoy'
 }
 
 function formatCurrency(n: number): string {

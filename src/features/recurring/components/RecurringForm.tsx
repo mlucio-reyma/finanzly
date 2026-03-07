@@ -80,7 +80,7 @@ export function RecurringForm({ recurring, onSuccess, onCancel, createRecurring,
       <label className="form-control w-full">
         <div className="label"><span className="label-text font-medium">Nombre *</span></div>
         <input type="text" required placeholder="Netflix, Renta, Gimnasio..."
-          className="input input-bordered w-full" value={name} onChange={e => setName(e.target.value)} />
+          className="input input-bordered w-full uppercase" value={name} onChange={e => setName(e.target.value.toUpperCase())} />
       </label>
 
       {/* Monto */}

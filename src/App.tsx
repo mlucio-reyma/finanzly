@@ -1,71 +1,49 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { LoginPage } from './features/auth/pages/LoginPage'
 import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
 import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
 import { ProtectedRoute } from './components/ProtectedRoute'
-import { ExpensesPage }   from './features/expenses/pages/ExpensesPage'
-import { NewExpensePage }  from './features/expenses/pages/NewExpensePage'
-import { DashboardPage }   from './features/dashboard/pages/DashboardPage'
-import { RecurringPage }   from './features/recurring/pages/RecurringPage'
+import { AppLayout } from './components/Navigation'
+import { ExpensesPage }  from './features/expenses/pages/ExpensesPage'
+import { NewExpensePage } from './features/expenses/pages/NewExpensePage'
+import { DashboardPage }  from './features/dashboard/pages/DashboardPage'
+import { RecurringPage }  from './features/recurring/pages/RecurringPage'
 import { AnalysisPage }   from './features/analysis/pages/AnalysisPage'
+
+// AppLayout ya incluye Navigation internamente; Outlet renderiza la ruta hija activa.
+const PrivateLayout = () => (
+  <AppLayout>
+    <Outlet />
+  </AppLayout>
+)
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Rutas públicas */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        {/* Rutas públicas — sin navegación */}
+        <Route path="/login"           element={<LoginPage />} />
+        <Route path="/register"        element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/reset-password"  element={<ResetPasswordPage />} />
 
-        {/* Rutas protegidas */}
+        {/* Rutas privadas — con navegación vía AppLayout */}
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <ProtectedRoute>
-              <DashboardPage />
+              <PrivateLayout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/expenses"
-          element={
-            <ProtectedRoute>
-              <ExpensesPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/expenses/new"
-          element={
-            <ProtectedRoute>
-              <NewExpensePage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/recurring"
-          element={
-            <ProtectedRoute>
-              <RecurringPage />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/analysis"
-          element={
-            <ProtectedRoute>
-              <AnalysisPage />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Ruta raíz → dashboard (ProtectedRoute redirige a /login si no hay sesión) */}
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        >
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard"    element={<DashboardPage />} />
+          <Route path="expenses"     element={<ExpensesPage />} />
+          <Route path="expenses/new" element={<NewExpensePage />} />
+          <Route path="recurring"    element={<RecurringPage />} />
+          <Route path="analysis"     element={<AnalysisPage />} />
+        </Route>
 
         {/* Ruta 404 */}
         <Route

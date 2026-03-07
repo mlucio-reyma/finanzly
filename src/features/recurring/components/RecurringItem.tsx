@@ -56,7 +56,7 @@ export function RecurringItem({ recurring, isPaid, onEdit, onDelete, onMarkAsPai
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="font-bold truncate">{recurring.name}</p>
+              <p className="font-bold truncate uppercase">{recurring.name}</p>
               {!recurring.active && (
                 <span className="badge badge-ghost badge-sm">PAUSADO</span>
               )}
@@ -67,7 +67,7 @@ export function RecurringItem({ recurring, isPaid, onEdit, onDelete, onMarkAsPai
                 <span className="badge badge-success badge-sm">Pagado ✓</span>
               )}
             </div>
-            <p className="text-sm text-base-content/60 mt-0.5">
+            <p className="text-sm text-base-content/60 mt-0.5 uppercase">
               {cat?.emoji ?? '📦'} {cat?.label ?? recurring.category}
             </p>
           </div>

@@ -19,6 +19,22 @@ function parseLocalDate(dateStr: string): Date {
   return new Date(y, m - 1, d)
 }
 
+function getRelativeDate(dateString: string): string {
+  const [year, month, day] = dateString.split('-').map(Number)
+  const expenseDate = new Date(year, month - 1, day)
+  const today = new Date()
+  const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const diffTime = todayNormalized.getTime() - expenseDate.getTime()
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24))
+
+  if (diffDays === 0) return 'Hoy'
+  if (diffDays === 1) return 'Ayer'
+  if (diffDays === -1) return 'Mañana'
+  if (diffDays > 1) return `Hace ${diffDays} días`
+  if (diffDays < -1) return `En ${Math.abs(diffDays)} días`
+  return 'Hoy'
+}
+
 function formatDate(dateStr: string): string {
   return parseLocalDate(dateStr).toLocaleDateString('es-MX', {
     day: 'numeric',
@@ -81,11 +97,11 @@ export function ExpenseItem({ expense, onEdit, onDelete }: Props) {
               {category?.emoji ?? '📦'}
             </span>
             <div className="min-w-0">
-              <p className="font-semibold text-base leading-tight truncate">
+              <p className="font-semibold text-base leading-tight truncate uppercase">
                 {category?.label ?? expense.category}
               </p>
               <p className="text-xs text-base-content/50 mt-0.5">
-                {formatDate(expense.date)}
+                {getRelativeDate(expense.date)} · {formatDate(expense.date)}
               </p>
             </div>
           </div>
@@ -98,21 +114,21 @@ export function ExpenseItem({ expense, onEdit, onDelete }: Props) {
 
         {/* Establecimiento */}
         {expense.establishment && (
-          <p className="text-sm text-base-content/60 leading-tight">
+          <p className="text-sm text-base-content/60 leading-tight uppercase">
             {expense.establishment}
           </p>
         )}
 
         {/* Descripción */}
         {shortDescription && (
-          <p className="text-sm text-base-content/80 leading-snug">
+          <p className="text-sm text-base-content/80 leading-snug uppercase">
             {shortDescription}
           </p>
         )}
 
         {/* Fila inferior: badge + botones */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <span className="badge badge-ghost badge-sm">
+          <span className="badge badge-ghost badge-sm uppercase">
             {paymentLabel}
           </span>
 

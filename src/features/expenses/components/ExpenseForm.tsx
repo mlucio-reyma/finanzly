@@ -13,9 +13,19 @@ interface Props {
   onCancel: () => void
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function getLocalDateString(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-const today = new Date().toISOString().split('T')[0]
+const today = getLocalDateString()
 
 const PAYMENT_METHODS = [
   { id: 'efectivo',      label: 'Efectivo' },
@@ -127,6 +137,7 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
           type="date"
           required
           className="input input-bordered w-full"
+          max={getLocalDateString()}
           value={date}
           onChange={e => setDate(e.target.value)}
         />
@@ -137,10 +148,10 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
         <div className="label"><span className="label-text font-medium">Establecimiento</span></div>
         <input
           type="text"
-          className="input input-bordered w-full"
+          className="input input-bordered w-full uppercase"
           placeholder="Ej: Walmart, Netflix, OXXO"
           value={establishment}
-          onChange={e => setEstablishment(e.target.value)}
+          onChange={e => setEstablishment(e.target.value.toUpperCase())}
         />
       </label>
 
@@ -168,12 +179,12 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
           </span>
         </div>
         <textarea
-          className="textarea textarea-bordered w-full resize-none"
+          className="textarea textarea-bordered w-full resize-none uppercase"
           placeholder="Opcional..."
           maxLength={DESC_MAX}
           rows={3}
           value={description}
-          onChange={e => setDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value.toUpperCase())}
         />
       </label>
 

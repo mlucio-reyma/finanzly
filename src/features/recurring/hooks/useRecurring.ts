@@ -20,6 +20,14 @@ export type RecurringFormData = {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 // Primer día del mes actual en formato YYYY-MM-DD (clave para el log)
+function getLocalDateString(): string {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 function currentMonthStart(): string {
   const now = new Date()
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`
@@ -142,7 +150,7 @@ export function useRecurring() {
         user_id:        user.id,
         amount:         payment.amount,
         category:       payment.category,
-        date:           new Date().toISOString().split('T')[0],
+        date:           getLocalDateString(),
         description:    payment.name,
         payment_method: 'debito',
       })
