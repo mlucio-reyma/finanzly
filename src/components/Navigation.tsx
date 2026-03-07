@@ -34,8 +34,8 @@ export default function Navigation() {
   return (
     <>
       {/* ── Navbar superior (solo móvil) ─────────────────────────────────── */}
-      <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-14 bg-base-100 border-b border-base-200 flex items-center justify-between px-4">
-        <span className="font-bold text-lg text-primary">Finanzly</span>
+      <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-14 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#10B981]/10 flex items-center justify-between px-4">
+        <span className="font-bold text-lg text-[#10B981]">Finanzly</span>
         <button
           onClick={handleLogout}
           aria-label="Cerrar sesión"
@@ -46,7 +46,7 @@ export default function Navigation() {
       </header>
 
       {/* ── Barra inferior (solo móvil) ──────────────────────────────────── */}
-      <nav aria-label="Navegación principal" className="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-base-100 border-t border-base-200 flex">
+      <nav aria-label="Navegación principal" className="lg:hidden fixed bottom-0 inset-x-0 z-50 fn-bottom-nav flex">
         {NAV_ITEMS.map(({ href, label, Icon }) => {
           const active = pathname === href
           return (
@@ -56,7 +56,7 @@ export default function Navigation() {
               aria-label={label}
               aria-current={active ? 'page' : undefined}
               className={`flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs transition-colors ${
-                active ? 'text-primary' : 'text-base-content/50 hover:text-base-content'
+                active ? 'fn-nav-active' : 'text-[#94A3B8] hover:text-white'
               }`}
             >
               <Icon />
@@ -67,9 +67,9 @@ export default function Navigation() {
       </nav>
 
       {/* ── Sidebar (solo desktop) ───────────────────────────────────────── */}
-      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 bg-base-100 border-r border-base-200 z-40">
+      <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 fn-sidebar z-40">
         <div className="px-6 py-6 shrink-0">
-          <span className="font-bold text-2xl text-primary">Finanzly</span>
+          <span className="font-bold text-2xl text-[#10B981]">Finanzly</span>
         </div>
 
         <nav aria-label="Navegación principal" className="flex-1 flex flex-col gap-1 px-3 overflow-y-auto">
@@ -82,8 +82,8 @@ export default function Navigation() {
                 aria-current={active ? 'page' : undefined}
                 className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   active
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-base-content/70 hover:bg-base-200 hover:text-base-content'
+                    ? 'bg-[#10B981]/10 fn-nav-active'
+                    : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'
                 }`}
               >
                 <Icon />
@@ -97,7 +97,7 @@ export default function Navigation() {
           <button
             onClick={handleLogout}
             aria-label="Cerrar sesión"
-            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-base-content/70 hover:bg-error/10 hover:text-error transition-colors"
+            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-[#10B981]/10 hover:text-[#10B981] transition-colors"
           >
             <IconLogout />
             <span>Cerrar sesión</span>
@@ -112,7 +112,7 @@ export default function Navigation() {
 
 export function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen bg-[#0F172A]">
       <Navigation />
       <main className="lg:ml-64 pt-14 lg:pt-0 pb-16 lg:pb-0">
         {children}

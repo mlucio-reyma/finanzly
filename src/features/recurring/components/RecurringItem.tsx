@@ -71,7 +71,7 @@ export function RecurringItem({ recurring, isPaid, onEdit, onDelete, onMarkAsPai
               {cat?.emoji ?? '📦'} {cat?.label ?? recurring.category}
             </p>
           </div>
-          <span className="font-bold text-lg text-primary whitespace-nowrap">
+          <span className="font-bold text-lg text-[#10B981] whitespace-nowrap">
             {formatCurrency(recurring.amount)}
           </span>
         </div>
@@ -103,7 +103,7 @@ export function RecurringItem({ recurring, isPaid, onEdit, onDelete, onMarkAsPai
 
           {/* Editar / Eliminar */}
           <div className="flex gap-1">
-            <button type="button" className="btn btn-ghost btn-xs text-base-content/60 hover:text-primary"
+            <button type="button" className="btn btn-ghost btn-xs text-base-content/60 hover:text-[#10B981]"
               onClick={() => onEdit(recurring)} aria-label="Editar pago">
               <IconEdit />
             </button>

@@ -68,7 +68,7 @@ export function HealthScore({ score, historicalScores }: Props) {
                 <Line
                   type="monotone"
                   dataKey="score"
-                  stroke="#6366f1"
+                  stroke="#10B981"
                   strokeWidth={2}
                   dot={{ r: 3 }}
                   activeDot={{ r: 5 }}

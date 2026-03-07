@@ -138,7 +138,7 @@ export function ExpenseFilters({ onApplyFilters, onClearFilters }: Props) {
               >
                 <input
                   type="checkbox"
-                  className="checkbox checkbox-sm checkbox-primary"
+                  className="checkbox checkbox-sm checkbox-success"
                   checked={selectedCategories.includes(cat.id)}
                   onChange={() => toggleCategory(cat.id)}
                   aria-label={cat.label}
@@ -153,14 +153,14 @@ export function ExpenseFilters({ onApplyFilters, onClearFilters }: Props) {
         <div className="flex gap-2 pt-1">
           <button
             type="button"
-            className="btn btn-ghost btn-sm flex-1"
+            className="bg-transparent border border-[#334155] text-[#94A3B8] hover:border-[#10B981] hover:text-[#10B981] rounded-lg px-4 py-2 transition-all duration-200 flex-1"
             onClick={handleClear}
           >
             Limpiar filtros
           </button>
           <button
             type="button"
-            className="btn btn-primary btn-sm flex-1"
+            className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 flex-1"
             onClick={handleApply}
           >
             Aplicar filtros

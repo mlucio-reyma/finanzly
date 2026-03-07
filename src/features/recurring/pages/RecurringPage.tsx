@@ -16,7 +16,7 @@ export function RecurringPage() {
   const [isFormOpen, setIsFormOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen">
       <div className="container mx-auto max-w-2xl px-4 py-6 pb-12">
 
         {/* Encabezado */}
@@ -24,7 +24,7 @@ export function RecurringPage() {
           <h1 className="text-2xl font-bold">Pagos Recurrentes</h1>
           <button
             type="button"
-            className="btn btn-primary btn-sm whitespace-nowrap"
+            className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 whitespace-nowrap"
             onClick={() => setIsFormOpen(true)}
           >
             + Nuevo pago

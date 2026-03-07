@@ -1,3 +1,122 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ── Finanzly Design System ─────────────────────────────── */
+
+:root {
+  --fn-navy:          #0F172A;
+  --fn-navy-800:      #1E293B;
+  --fn-navy-700:      #263347;
+  --fn-emerald:       #10B981;
+  --fn-emerald-light: #34D399;
+  --fn-text:          #F1F5F9;
+  --fn-text-muted:    #94A3B8;
+}
+
+html, body {
+  background-color: var(--fn-navy) !important;
+  color: var(--fn-text) !important;
+  font-family: 'Inter', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+/* Override DaisyUI dark theme con colores Finanzly */
+[data-theme="dark"] {
+  --p: 160 84% 39%;
+  background-color: var(--fn-navy) !important;
+}
+
+/* Cards con glassmorphism */
+.fn-card {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Card de hero (total del mes) */
+.fn-hero-card {
+  background: linear-gradient(135deg, #1a3a2e 0%, #0f2419 50%, #0F172A 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+}
+
+/* Sidebar */
+.fn-sidebar {
+  background: rgba(15, 23, 42, 0.95);
+  border-right: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+/* Bottom nav */
+.fn-bottom-nav {
+  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+/* Nav item activo */
+.fn-nav-active {
+  color: #10B981 !important;
+}
+
+/* Botón primario */
+.fn-btn-primary {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+.fn-btn-primary:hover {
+  background: linear-gradient(135deg, #34D399, #10B981);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Input fields */
+.fn-input {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  color: #F1F5F9 !important;
+  border-radius: 0.5rem;
+}
+
+.fn-input:focus {
+  border-color: #10B981 !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Texto emerald */
+.fn-text-emerald {
+  color: #10B981;
+}
+
+/* Monto grande */
+.fn-amount {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #F1F5F9;
+  letter-spacing: -0.02em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1E293B; }
+::-webkit-scrollbar-thumb { background: #10B981; border-radius: 3px; }
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fn-animate-in {
+  animation: fadeIn 0.3s ease forwards;
+}

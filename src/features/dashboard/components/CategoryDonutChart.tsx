@@ -4,7 +4,28 @@ import type { CategoryBreakdownItem } from '../hooks/useDashboardData'
 
 // ── Paleta de colores consistente para las categorías ─────────────────────────
 
-const COLORS = ['#6366f1', '#f59e0b', '#10b981', '#f43f5e', '#3b82f6']
+const COLORS = [
+  '#10B981',  // emerald principal - Finanzly brand
+  '#F59E0B',  // amber
+  '#3B82F6',  // blue
+  '#F87171',  // red suave
+  '#A78BFA',  // purple suave
+  '#FB923C',  // orange
+  '#34D399',  // emerald claro
+  '#60A5FA',  // blue claro
+  '#FBBF24',  // yellow
+  '#F472B6',  // pink
+  '#818CF8',  // indigo
+  '#4ADE80',  // green claro
+  '#E879F9',  // fuchsia
+  '#38BDF8',  // sky blue
+  '#FCD34D',  // yellow claro
+  '#C084FC',  // purple claro
+  '#86EFAC',  // green pastel
+  '#FCA5A5',  // red pastel
+  '#93C5FD',  // blue pastel
+  '#6EE7B7',  // teal claro
+]
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -63,7 +84,7 @@ export function CategoryDonutChart() {
   const top5 = data.slice(0, 5)
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="fn-card p-6 flex flex-col gap-4">
 
       {/* Gráfica de dona */}
       <ResponsiveContainer width="100%" height={220}>

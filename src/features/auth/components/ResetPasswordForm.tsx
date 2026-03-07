@@ -92,7 +92,7 @@ export function ResetPasswordForm() {
 
       <button
         type="submit"
-        className="btn btn-primary w-full"
+        className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 w-full"
         disabled={loading}
         aria-label="Guardar nueva contraseña"
       >

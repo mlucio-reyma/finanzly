@@ -17,7 +17,7 @@ function greeting(): string {
 
 export function DashboardPage() {
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen">
       <div className="container mx-auto max-w-4xl px-4 py-6 pb-12 flex flex-col gap-6">
 
         {/* Encabezado */}
@@ -30,7 +30,7 @@ export function DashboardPage() {
               Aquí está tu resumen financiero
             </p>
           </div>
-          <Link to="/expenses/new" className="btn btn-primary btn-sm whitespace-nowrap">
+          <Link to="/expenses/new" className="btn bg-[#10B981] hover:bg-[#059669] text-white border-none btn-sm whitespace-nowrap">
             + Agregar gasto
           </Link>
         </div>

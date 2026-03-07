@@ -23,7 +23,7 @@ export function MonthlyCommittedCard({ totalMonthly }: Props) {
         <p className="text-sm font-medium text-base-content/60">
           Compromisos del mes
         </p>
-        <p className="text-3xl font-bold text-primary">
+        <p className="text-3xl font-bold text-[#10B981]">
           {formatCurrency(totalMonthly)}
         </p>
         <p className="text-xs text-base-content/40">

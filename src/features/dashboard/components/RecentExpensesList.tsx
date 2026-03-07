@@ -74,7 +74,7 @@ export function RecentExpensesList() {
   }, [])
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="fn-card p-6 flex flex-col gap-3">
 
       {/* Estado: cargando */}
       {loading && [1, 2, 3, 4, 5].map(i => <SkeletonItem key={i} />)}
@@ -108,7 +108,7 @@ export function RecentExpensesList() {
               <p className="text-sm font-medium truncate">{label}</p>
               <p className="text-xs text-base-content/50">{relativeDate(exp.date)}</p>
             </div>
-            <span className="text-sm font-semibold whitespace-nowrap flex-shrink-0">
+            <span className="text-sm font-semibold whitespace-nowrap flex-shrink-0 text-[#10B981]">
               {formatCurrency(exp.amount)}
             </span>
           </div>
@@ -117,7 +117,7 @@ export function RecentExpensesList() {
 
       {/* Link a historial completo */}
       {!loading && (
-        <Link to="/expenses" className="btn btn-ghost btn-sm w-full mt-1">
+        <Link to="/expenses" className="btn btn-ghost btn-sm w-full mt-1 text-[#10B981]">
           Ver todos →
         </Link>
       )}

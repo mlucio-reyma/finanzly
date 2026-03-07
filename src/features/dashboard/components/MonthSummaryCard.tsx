@@ -15,20 +15,20 @@ function formatCurrency(n: number): string {
 
 function Skeleton() {
   return (
-    <div className="card bg-primary animate-pulse">
-      <div className="card-body gap-4">
-        <div className="h-4 w-28 bg-primary-content/20 rounded" />
-        <div className="h-12 w-48 bg-primary-content/20 rounded" />
-        <div className="h-4 w-20 bg-primary-content/20 rounded" />
+    <div className="fn-hero-card animate-pulse">
+      <div className="p-6 gap-4 flex flex-col">
+        <div className="h-4 w-28 bg-white/10 rounded" />
+        <div className="h-12 w-48 bg-white/10 rounded" />
+        <div className="h-4 w-20 bg-white/10 rounded" />
         <div className="divider my-0 opacity-20" />
         <div className="flex justify-between">
           <div className="flex flex-col gap-1">
-            <div className="h-3 w-24 bg-primary-content/20 rounded" />
-            <div className="h-5 w-20 bg-primary-content/20 rounded" />
+            <div className="h-3 w-24 bg-white/10 rounded" />
+            <div className="h-5 w-20 bg-white/10 rounded" />
           </div>
           <div className="flex flex-col gap-1 items-end">
-            <div className="h-3 w-24 bg-primary-content/20 rounded" />
-            <div className="h-5 w-12 bg-primary-content/20 rounded" />
+            <div className="h-3 w-24 bg-white/10 rounded" />
+            <div className="h-5 w-12 bg-white/10 rounded" />
           </div>
         </div>
       </div>
@@ -53,13 +53,13 @@ export function MonthSummaryCard() {
   }
 
   return (
-    <div className="card bg-primary text-primary-content shadow-lg">
-      <div className="card-body gap-3">
+    <div className="fn-hero-card">
+      <div className="p-6 flex flex-col gap-3">
 
-        <p className="text-sm font-medium opacity-80">Total del mes</p>
+        <p className="text-sm font-medium text-[#94A3B8]">Total del mes</p>
 
         {/* Monto principal — grande y prominente */}
-        <p className="text-4xl font-bold tracking-tight">
+        <p className="fn-amount text-white">
           {formatCurrency(currentTotal)}
         </p>
 
@@ -70,12 +70,12 @@ export function MonthSummaryCard() {
         {/* Métricas secundarias */}
         <div className="flex justify-between">
           <div>
-            <p className="text-xs opacity-70">Promedio diario</p>
-            <p className="font-semibold">{formatCurrency(dailyAverage)}</p>
+            <p className="text-xs text-[#94A3B8]">Promedio diario</p>
+            <p className="font-semibold text-white">{formatCurrency(dailyAverage)}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs opacity-70">Transacciones</p>
-            <p className="font-semibold">{transactionCount}</p>
+            <p className="text-xs text-[#94A3B8]">Transacciones</p>
+            <p className="font-semibold text-white">{transactionCount}</p>
           </div>
         </div>
 

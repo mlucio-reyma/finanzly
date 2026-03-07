@@ -87,7 +87,7 @@ export function ExpenseItem({ expense, onEdit, onDelete }: Props) {
     : expense.description
 
   return (
-    <div className="card card-bordered bg-base-100 shadow-sm hover:shadow-md transition-shadow">
+    <div className="fn-card mb-3">
       <div className="card-body p-4 gap-2">
 
         {/* Fila principal: categoría + monto + acciones */}
@@ -100,14 +100,14 @@ export function ExpenseItem({ expense, onEdit, onDelete }: Props) {
               <p className="font-semibold text-base leading-tight truncate uppercase">
                 {category?.label ?? expense.category}
               </p>
-              <p className="text-xs text-base-content/50 mt-0.5">
+              <p className="text-xs text-[#94A3B8] mt-0.5">
                 {getRelativeDate(expense.date)} · {formatDate(expense.date)}
               </p>
             </div>
           </div>
 
           {/* Monto */}
-          <span className="font-bold text-lg text-primary whitespace-nowrap">
+          <span className="font-bold text-lg text-[#10B981] whitespace-nowrap">
             {formatAmount(expense.amount)}
           </span>
         </div>
@@ -135,7 +135,7 @@ export function ExpenseItem({ expense, onEdit, onDelete }: Props) {
           <div className="flex gap-1">
             <button
               type="button"
-              className="btn btn-ghost btn-xs text-base-content/60 hover:text-primary"
+              className="btn btn-ghost btn-xs text-base-content/60 hover:text-[#10B981]"
               onClick={() => onEdit(expense)}
               aria-label="Editar gasto"
             >

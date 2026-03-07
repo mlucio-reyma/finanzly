@@ -62,7 +62,7 @@ export function TopEstablishments({ topEstablishments, establishmentCoverage }: 
                 </div>
 
                 {/* Total */}
-                <span className="font-bold text-sm text-primary whitespace-nowrap">
+                <span className="font-bold text-sm text-[#10B981] whitespace-nowrap">
                   {formatCurrency(est.total)}
                 </span>
               </div>

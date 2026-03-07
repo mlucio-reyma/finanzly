@@ -36,7 +36,7 @@ export function ForgotPasswordForm() {
           </span>
         </div>
         <div className="text-center">
-          <Link to="/login" className="link link-primary text-sm font-medium">
+          <Link to="/login" className="text-[#10B981] hover:text-[#34D399] text-sm font-medium">
             Volver al inicio de sesión
           </Link>
         </div>
@@ -75,7 +75,7 @@ export function ForgotPasswordForm() {
 
       <button
         type="submit"
-        className="btn btn-primary w-full"
+        className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 w-full"
         disabled={loading}
         aria-label="Enviar enlace de recuperación"
       >
@@ -84,7 +84,7 @@ export function ForgotPasswordForm() {
       </button>
 
       <p className="text-center text-sm mt-6">
-        <Link to="/login" className="link link-primary font-medium">
+        <Link to="/login" className="text-[#10B981] hover:text-[#34D399] font-medium">
           Volver al inicio de sesión
         </Link>
       </p>

@@ -29,7 +29,8 @@ export function ExpensesPage() {
       {/* FAB — botón flotante para agregar gasto */}
       <button
         type="button"
-        className="btn btn-primary btn-circle btn-lg fixed bottom-6 right-6 shadow-lg z-40"
+        className="fixed bottom-20 right-4 lg:bottom-8 lg:right-8 w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg z-50 transition-all duration-200 hover:scale-110"
+        style={{ background: 'linear-gradient(135deg, #10B981, #059669)', boxShadow: '0 0 20px rgba(16,185,129,0.4)' }}
         onClick={() => setIsFormOpen(true)}
         aria-label="Agregar gasto"
       >

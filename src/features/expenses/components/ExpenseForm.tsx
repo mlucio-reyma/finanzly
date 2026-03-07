@@ -192,7 +192,7 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
       <div className="flex gap-3 pt-2">
         <button
           type="button"
-          className="btn btn-ghost flex-1"
+          className="bg-transparent border border-[#334155] text-[#94A3B8] hover:border-[#10B981] hover:text-[#10B981] rounded-lg px-4 py-2 transition-all duration-200 flex-1"
           onClick={onCancel}
           disabled={loading}
         >
@@ -200,7 +200,7 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
         </button>
         <button
           type="submit"
-          className="btn btn-primary flex-1"
+          className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 flex-1"
           disabled={loading}
           aria-busy={loading}
         >

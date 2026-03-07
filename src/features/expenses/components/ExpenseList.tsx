@@ -95,7 +95,7 @@ export function ExpenseList() {
           <span className="text-sm text-base-content/60">
             {expenses.length} transacción{expenses.length !== 1 ? 'es' : ''}
           </span>
-          <span className="font-bold text-lg text-primary">
+          <span className="font-bold text-lg text-[#10B981]">
             {formatCurrency(total)}
           </span>
         </div>

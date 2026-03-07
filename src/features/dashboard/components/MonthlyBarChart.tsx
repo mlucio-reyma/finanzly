@@ -9,8 +9,8 @@ import { useDashboardData } from '../hooks/useDashboardData'
 // Clave del mes actual en formato "YYYY-MM" para distinguir la barra activa
 const CURRENT_MONTH = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
 
-const COLOR_CURRENT = '#6366f1' // indigo — mes actual
-const COLOR_OTHER   = '#d1d5db' // gris   — meses anteriores
+const COLOR_CURRENT = '#10B981' // emerald — mes actual
+const COLOR_OTHER   = '#1E293B' // navy   — meses anteriores
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -61,18 +61,19 @@ export function MonthlyBarChart() {
   }
 
   return (
+    <div className="fn-card p-6">
     <ResponsiveContainer width="100%" height={200}>
       <BarChart data={data} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
 
         <XAxis
           dataKey="month"
-          tick={{ fontSize: 12 }}
+          tick={{ fontSize: 12, fill: '#94A3B8' }}
           axisLine={false}
           tickLine={false}
         />
         <YAxis
           tickFormatter={abbreviate}
-          tick={{ fontSize: 11 }}
+          tick={{ fontSize: 11, fill: '#94A3B8' }}
           axisLine={false}
           tickLine={false}
           width={48}
@@ -90,5 +91,6 @@ export function MonthlyBarChart() {
 
       </BarChart>
     </ResponsiveContainer>
+    </div>
   )
 }

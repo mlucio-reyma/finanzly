@@ -121,17 +121,17 @@ export function RecurringForm({ recurring, onSuccess, onCancel, createRecurring,
 
       {/* Toggle activo */}
       <label className="flex items-center gap-3 cursor-pointer py-1">
-        <input type="checkbox" className="toggle toggle-primary"
+        <input type="checkbox" className="toggle toggle-success"
           checked={active} onChange={e => setActive(e.target.checked)} />
         <span className="label-text font-medium">Pago activo</span>
       </label>
 
       {/* Acciones */}
       <div className="flex gap-3 pt-2">
-        <button type="button" className="btn btn-ghost flex-1" onClick={onCancel} disabled={loading}>
+        <button type="button" className="bg-transparent border border-[#334155] text-[#94A3B8] hover:border-[#10B981] hover:text-[#10B981] rounded-lg px-4 py-2 transition-all duration-200 flex-1" onClick={onCancel} disabled={loading}>
           Cancelar
         </button>
-        <button type="submit" className="btn btn-primary flex-1" disabled={loading} aria-busy={loading}>
+        <button type="submit" className="bg-[#10B981] hover:bg-[#059669] text-white font-semibold border-none rounded-lg px-4 py-2 transition-all duration-200 flex-1" disabled={loading} aria-busy={loading}>
           {loading && <span className="loading loading-spinner loading-sm" />}
           {isEditing ? 'Guardar cambios' : 'Crear pago'}
         </button>
