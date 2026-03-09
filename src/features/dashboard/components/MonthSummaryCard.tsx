@@ -1,12 +1,13 @@
 import { useDashboardData } from '../hooks/useDashboardData'
 import { TrendIndicator }   from './TrendIndicator'
+import { useProfile }       from '../../profile/hooks/useProfile'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-function formatCurrency(n: number): string {
+function formatCurrency(n: number, currency: string): string {
   return new Intl.NumberFormat('es-MX', {
     style:                 'currency',
-    currency:              'MXN',
+    currency,
     minimumFractionDigits: 2,
   }).format(n)
 }
@@ -41,6 +42,8 @@ function Skeleton() {
 export function MonthSummaryCard() {
   const { summary } = useDashboardData()
   const { currentTotal, percentageChange, dailyAverage, transactionCount, loading, error } = summary
+  const { profile }  = useProfile()
+  const currency     = profile?.currency ?? 'MXN'
 
   if (loading) return <Skeleton />
 
@@ -60,7 +63,7 @@ export function MonthSummaryCard() {
 
         {/* Monto principal — grande y prominente */}
         <p className="fn-amount text-white">
-          {formatCurrency(currentTotal)}
+          {formatCurrency(currentTotal, currency)}
         </p>
 
         <TrendIndicator value={percentageChange} />
@@ -71,7 +74,7 @@ export function MonthSummaryCard() {
         <div className="flex justify-between">
           <div>
             <p className="text-xs text-[#94A3B8]">Promedio diario</p>
-            <p className="font-semibold text-white">{formatCurrency(dailyAverage)}</p>
+            <p className="font-semibold text-white">{formatCurrency(dailyAverage, currency)}</p>
           </div>
           <div className="text-right">
             <p className="text-xs text-[#94A3B8]">Transacciones</p>

@@ -23,7 +23,7 @@
 ## 🗺️ Features del Producto
 
 ### Feature 001 — Autenticación & Seguridad
-**Estado:** 📋 Especificado
+**Estado:** ✅ Implementado
 
 Permite a los usuarios crear cuenta, iniciar sesión y gestionar su perfil de forma segura.
 
@@ -44,7 +44,7 @@ Permite a los usuarios crear cuenta, iniciar sesión y gestionar su perfil de fo
 ---
 
 ### Feature 002 — Gestión de Gastos
-**Estado:** 📋 Especificado
+**Estado:** ✅ Implementado
 
 CRUD completo de gastos. El corazón de la aplicación.
 
@@ -82,7 +82,7 @@ CRUD completo de gastos. El corazón de la aplicación.
 ---
 
 ### Feature 003 — Dashboard & Visualizaciones
-**Estado:** 📋 Especificado
+**Estado:** ✅ Implementado
 
 Vista principal con resumen financiero y gráficas de análisis.
 
@@ -102,7 +102,7 @@ Vista principal con resumen financiero y gráficas de análisis.
 ---
 
 ### Feature 004 — Pagos Recurrentes & Recordatorios
-**Estado:** 📋 Especificado
+**Estado:** ✅ Implementado
 
 Gestión de suscripciones y pagos fijos con notificaciones por email.
 
@@ -125,7 +125,7 @@ Gestión de suscripciones y pagos fijos con notificaciones por email.
 ---
 
 ### Feature 005 — Análisis Inteligente de Ahorros
-**Estado:** 📋 Especificado
+**Estado:** ✅ Implementado
 
 Motor de detección de patrones y recomendaciones personalizadas.
 
@@ -143,6 +143,39 @@ Motor de detección de patrones y recomendaciones personalizadas.
 
 ---
 
+### Feature 006 — Categorías CRUD
+**Estado:** ✅ Implementado
+
+CRUD de categorías personalizadas de gastos con emoji y color.
+
+**Historias de usuario:**
+- Como usuario, quiero crear mis propias categorías con emoji y color personalizados.
+- Como usuario, quiero editar o eliminar categorías que ya no uso.
+- Como usuario, quiero activar/desactivar categorías sin eliminarlas.
+- Como usuario, quiero elegir mis categorías personalizadas al registrar un gasto.
+
+---
+
+### Feature 007 — Perfil de Usuario
+**Estado:** ✅ Implementado
+
+Gestión del perfil personal: nombre, avatar y moneda preferida.
+
+**Historias de usuario:**
+- Como usuario, quiero ver y editar mi nombre completo.
+- Como usuario, quiero subir una foto de perfil.
+- Como usuario, quiero elegir mi moneda preferida para que los montos se muestren en mi divisa local.
+- Como usuario, quiero acceder a mi perfil desde la navegación principal.
+- Como usuario, quiero poder cerrar sesión desde la página de perfil.
+
+**Criterios clave:**
+- Moneda aplicada globalmente en dashboard
+- Avatar en Supabase Storage (bucket `avatars` público)
+- 19 monedas disponibles vía tabla `supported_currencies`
+- Perfil creado automáticamente con defaults `MXN / $` en primer acceso
+
+---
+
 ## 🚀 Despliegue
 
 | Entorno | URL | Plataforma |
@@ -156,12 +189,14 @@ Motor de detección de patrones y recomendaciones personalizadas.
 
 ---
 
-## 📅 Plan de Implementación (8 semanas)
+## 📅 Plan de Implementación (actualizado)
 
-| Semana | Feature | Esfuerzo estimado |
-|--------|---------|------------------|
-| 1 | Setup base + Feature 001 Auth | ~7 hrs |
-| 2–3 | Feature 002 Gestión de Gastos | ~15 hrs |
-| 4–5 | Feature 003 Dashboard | ~18 hrs |
-| 6 | Feature 004 Recurrentes | ~12 hrs |
-| 7–8 | Feature 005 Análisis Inteligente | ~25 hrs |
+| Semana | Feature | Esfuerzo estimado | Estado |
+|--------|---------|------------------|--------|
+| 1 | Setup base + Feature 001 Auth | ~7 hrs | ✅ |
+| 2–3 | Feature 002 Gestión de Gastos | ~15 hrs | ✅ |
+| 4–5 | Feature 003 Dashboard | ~18 hrs | ✅ |
+| 6 | Feature 004 Recurrentes | ~12 hrs | ✅ |
+| 7–8 | Feature 005 Análisis Inteligente | ~25 hrs | ✅ |
+| 9 | Feature 006 Categorías CRUD | ~6 hrs | ✅ |
+| 10 | Feature 007 Perfil de Usuario | ~4 hrs | ✅ |

@@ -50,6 +50,19 @@
 - src/types/categories.ts
 **Notas:** CRUD completo con emoji picker y color picker. Tabla custom_categories en Supabase con RLS activo. Integrada con ExpenseForm vía allCategories. No modificar sin revisión explícita.
 
+### Rediseño Visual [PROTEGIDO]
+**Estado:** Completo y verificado
+**Archivos protegidos:**
+- `tailwind.config.js`
+- `src/index.css`
+- `index.html`
+
+### Feature 007 — Perfil de Usuario [PROTEGIDO]
+**Estado:** Completo y verificado
+**Archivos protegidos:**
+- `src/features/profile/**`
+- `src/components/Navigation.tsx`
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)

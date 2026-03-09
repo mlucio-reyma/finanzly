@@ -20,7 +20,8 @@
       "Bash(npx vite build --mode development)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\migue\\.claude\\plans"
+      "c:\\Users\\migue\\.claude\\plans",
+      "c:\\Desarrollo ERP\\finanzly\\src\\features\\profile"
     ]
   }
 }

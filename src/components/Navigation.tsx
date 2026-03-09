@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth/hooks/useAuth'
+import { useProfile } from '../features/profile/hooks/useProfile'
 
 // ── Iconos SVG ─────────────────────────────────────────────────────────────────
 
@@ -10,6 +11,7 @@ const IconRepeat = () => <svg xmlns="http://www.w3.org/2000/svg" className="w-5 
 const IconChart  = () => <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
 const IconTag    = () => <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z" /></svg>
 const IconLogout = () => <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+const IconUser   = () => <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
 
 // ── Items de navegación ────────────────────────────────────────────────────────
 
@@ -18,8 +20,32 @@ const NAV_ITEMS = [
   { href: '/expenses',    label: 'Gastos',      Icon: IconList   },
   { href: '/categories',  label: 'Categorías',  Icon: IconTag    },
   { href: '/recurring',   label: 'Recurrentes', Icon: IconRepeat },
-  { href: '/analysis',  label: 'Análisis',    Icon: IconChart  },
+  { href: '/analysis',    label: 'Análisis',    Icon: IconChart  },
 ] as const
+
+// ── Avatar mobile pequeño ─────────────────────────────────────────────────────
+
+function MobileUserButton({ onClick }: { onClick: () => void }) {
+  const { profile } = useProfile()
+
+  return (
+    <button
+      onClick={onClick}
+      aria-label="Mi perfil"
+      className="btn btn-ghost btn-sm btn-square"
+    >
+      {profile?.avatar_url ? (
+        <img
+          src={profile.avatar_url}
+          alt="Avatar"
+          className="w-7 h-7 rounded-full object-cover border border-[#10B981]/40"
+        />
+      ) : (
+        <IconUser />
+      )}
+    </button>
+  )
+}
 
 // ── Navigation ─────────────────────────────────────────────────────────────────
 
@@ -38,13 +64,7 @@ export default function Navigation() {
       {/* ── Navbar superior (solo móvil) ─────────────────────────────────── */}
       <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-14 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#10B981]/10 flex items-center justify-between px-4">
         <span className="font-bold text-lg text-[#10B981]">Finanzly</span>
-        <button
-          onClick={handleLogout}
-          aria-label="Cerrar sesión"
-          className="btn btn-ghost btn-sm btn-square"
-        >
-          <IconLogout />
-        </button>
+        <MobileUserButton onClick={() => navigate('/profile')} />
       </header>
 
       {/* ── Barra inferior (solo móvil) ──────────────────────────────────── */}
@@ -95,7 +115,21 @@ export default function Navigation() {
           })}
         </nav>
 
-        <div className="px-3 pb-6 shrink-0">
+        <div className="px-3 pb-6 shrink-0 flex flex-col gap-1">
+          {/* Enlace Perfil — justo antes de Cerrar sesión */}
+          <button
+            onClick={() => navigate('/profile')}
+            aria-current={pathname === '/profile' ? 'page' : undefined}
+            className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              pathname === '/profile'
+                ? 'bg-[#10B981]/10 fn-nav-active'
+                : 'text-[#94A3B8] hover:bg-white/5 hover:text-white'
+            }`}
+          >
+            <IconUser />
+            <span>Perfil</span>
+          </button>
+
           <button
             onClick={handleLogout}
             aria-label="Cerrar sesión"
