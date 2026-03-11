@@ -26,7 +26,7 @@ CRUD completo de gastos personales. Es el núcleo funcional de Finanzly. El usua
 - [ ] Fecha: default hoy, selector de fecha completo
 - [ ] Descripción: opcional, máximo 200 caracteres con contador visible
 - [ ] Establecimiento: opcional, texto libre (ej: "Walmart", "Netflix", "OXXO")
-- [ ] Método de pago: efectivo / débito / crédito / transferencia
+- [ ] Método de pago: EFECTIVO / DÉBITO / CRÉDITO / TRANSFERENCIA
 - [ ] Confirmación visual (toast) tras guardar exitosamente
 - [ ] Formulario se limpia tras guardar
 
@@ -146,18 +146,18 @@ CREATE POLICY "Users can CRUD own expenses"
 ### Categorías (Enum)
 ```typescript
 export const CATEGORIES = [
-  { id: 'alimentacion',    label: 'Alimentación',       emoji: '🍔' },
-  { id: 'vivienda',        label: 'Vivienda',            emoji: '🏠' },
-  { id: 'transporte',      label: 'Transporte / Gas',    emoji: '🚗' },
-  { id: 'salud',           label: 'Salud',               emoji: '💊' },
-  { id: 'entretenimiento', label: 'Entretenimiento',     emoji: '🎮' },
-  { id: 'ropa',            label: 'Ropa',                emoji: '👕' },
-  { id: 'educacion',       label: 'Educación',           emoji: '📚' },
-  { id: 'trabajo',         label: 'Trabajo',             emoji: '💼' },
-  { id: 'mascotas',        label: 'Mascotas',            emoji: '🐾' },
-  { id: 'regalos',         label: 'Regalos',             emoji: '🎁' },
-  { id: 'deudas',          label: 'Deudas / Créditos',  emoji: '💳' },
-  { id: 'otros',           label: 'Otros',               emoji: '📦' },
+  { id: 'alimentacion',    label: 'ALIMENTACIÓN',      emoji: '🍔' },
+  { id: 'vivienda',        label: 'VIVIENDA',           emoji: '🏠' },
+  { id: 'transporte',      label: 'TRANSPORTE / GAS',   emoji: '🚗' },
+  { id: 'salud',           label: 'SALUD',              emoji: '💊' },
+  { id: 'entretenimiento', label: 'ENTRETENIMIENTO',    emoji: '🎮' },
+  { id: 'ropa',            label: 'ROPA',               emoji: '👕' },
+  { id: 'educacion',       label: 'EDUCACIÓN',          emoji: '📚' },
+  { id: 'trabajo',         label: 'TRABAJO',            emoji: '💼' },
+  { id: 'mascotas',        label: 'MASCOTAS',           emoji: '🐾' },
+  { id: 'regalos',         label: 'REGALOS',            emoji: '🎁' },
+  { id: 'deudas',          label: 'DEUDAS / CRÉDITOS', emoji: '💳' },
+  { id: 'otros',           label: 'OTROS',              emoji: '📦' },
 ] as const;
 ```
 

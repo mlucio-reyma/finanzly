@@ -35,7 +35,7 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 
 ### 💸 Gestión de Gastos
 - Registra gastos con categoría, establecimiento, método de pago y descripción
-- 12 categorías predefinidas con íconos (🍔 Alimentación, 🏠 Vivienda, 🚗 Transporte, y más)
+- 12 categorías predefinidas con íconos (🍔 ALIMENTACIÓN, 🏠 VIVIENDA, 🚗 TRANSPORTE, y más)
 - Filtros combinables: rango de fechas, categoría y método de pago
 - Edición y eliminación con confirmación
 - Paginación del lado del servidor — sin límite de historial

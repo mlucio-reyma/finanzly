@@ -27,10 +27,10 @@ function getLocalDateString(): string {
 const today = getLocalDateString()
 
 const PAYMENT_METHODS = [
-  { id: 'efectivo',      label: 'Efectivo' },
-  { id: 'debito',        label: 'Débito' },
-  { id: 'credito',       label: 'Crédito' },
-  { id: 'transferencia', label: 'Transferencia' },
+  { id: 'efectivo',      label: 'EFECTIVO' },
+  { id: 'debito',        label: 'DÉBITO' },
+  { id: 'credito',       label: 'CRÉDITO' },
+  { id: 'transferencia', label: 'TRANSFERENCIA' },
 ] as const
 
 const DESC_MAX = 200
