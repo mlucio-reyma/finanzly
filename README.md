@@ -306,6 +306,7 @@ feature/
 | 🔜 Modo multi-moneda (MXN, ARS, CLP, EUR...) | Planeado |
 | 🔜 Metas de ahorro | Planeado |
 | 🔜 Integración con Claude API para recomendaciones avanzadas | Futuro |
+| 🔜 Chat con IA integración con Claude API para análisis conversacional de tus finanzas  | Futuro |
 
 ---
 
