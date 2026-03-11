@@ -62,7 +62,7 @@ export function HealthScore({ score, historicalScores }: Props) {
                 <XAxis dataKey="month" tick={{ fontSize: 11 }} />
                 <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
                 <Tooltip
-                  formatter={(value: number) => [`${value} pts`, 'Score']}
+                  formatter={(value: number | undefined) => [`${value ?? 0} pts`, 'Score']}
                   contentStyle={{ fontSize: 12 }}
                 />
                 <Line
