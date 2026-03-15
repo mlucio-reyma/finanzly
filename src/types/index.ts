@@ -6,6 +6,14 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
+export type ScanResult = {
+  date: string | null
+  establishment: string | null
+  description: string | null
+  amount: number | null
+  confidence: number
+}
+
 export interface Profile {
   id: string
   email: string

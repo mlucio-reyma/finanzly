@@ -60,6 +60,15 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 - Las categorías activas aparecen en el formulario de gastos junto a las 12 predefinidas
 - Vista de administración con lista colapsable de categorías del sistema
 
+### 📸 Escaneo de Recibo con IA
+- Fotografía un ticket o sube una imagen desde el formulario de nuevo gasto
+- La IA (Claude Vision) extrae automáticamente: monto, fecha, establecimiento y descripción
+- El formulario se pre-llena al instante — solo revisa y guarda
+- Badge de confianza en 3 niveles: verde ✨ / amarillo ⚠️ / rojo ❌
+- Campos no detectados se señalan explícitamente para completarlos a mano
+- Funciona con cámara trasera en móvil (`capture="environment"`) y con archivos JPEG, PNG, WebP, HEIC
+- La imagen queda vinculada al gasto en Supabase Storage
+
 ### 🧠 Análisis Inteligente
 - **Score de salud financiera** (0–100) calculado mensualmente con histórico de 6 meses
 - **Detección de anomalías**: categorías donde gastas >20% más que tu promedio histórico
@@ -79,6 +88,7 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 | Backend / DB | Supabase | Auth + PostgreSQL + RLS en una sola plataforma |
 | Gráficas | Recharts | Responsive, composable, compatible con React |
 | Deploy | Cloudflare Pages | Edge global, gratis, SSL automático |
+| Automatización IA | n8n + Claude Vision API | Extracción de datos desde recibos |
 
 ---
 
@@ -109,9 +119,14 @@ Crea un archivo `.env.local` en la raíz del proyecto:
 ```env
 VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
 VITE_SUPABASE_ANON_KEY=tu-anon-key-publica
+
+# Opcional — requerido solo para el feature de Escaneo de Recibo con IA
+VITE_N8N_WEBHOOK_RECEIPT_SCAN=https://tu-instancia-n8n.com/webhook/receipt-scan
 ```
 
 > ⚠️ **Nunca** expongas la `service_role` key en el frontend.
+
+> ℹ️ Sin `VITE_N8N_WEBHOOK_RECEIPT_SCAN` el botón de escaneo simplemente no aparecerá en producción; el resto de la app funciona con normalidad.
 
 ### 4. Configurar Supabase
 
@@ -155,6 +170,7 @@ CREATE TABLE expenses (
   description TEXT CHECK (char_length(description) <= 200),
   establishment TEXT,
   payment_method TEXT DEFAULT 'efectivo',
+  receipt_url TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -266,8 +282,8 @@ src/
 │   ├── recurring/       # Pagos recurrentes y recordatorios
 │   ├── analysis/        # Score, anomalías, recomendaciones
 │   └── categories/      # CRUD de categorías personalizadas
-├── lib/                 # Cliente de Supabase, utilidades
-└── types/               # TypeScript types globales, categorías
+├── lib/                 # Cliente de Supabase, receipt-scan (IA), utilidades
+└── types/               # TypeScript types globales, categorías, ScanResult
 ```
 
 Cada feature sigue el patrón:
@@ -301,12 +317,12 @@ feature/
 | ✅ Pagos recurrentes | Implementado |
 | ✅ Análisis inteligente (score + anomalías + recomendaciones) | Implementado |
 | ✅ Categorías personalizadas (CRUD + emoji + color) | Implementado |
+| ✅ Escaneo de recibo con IA (Claude Vision + n8n) | Implementado |
 | 🔜 Recordatorios por email (Edge Functions) | Próximo |
 | 🔜 Exportar historial a CSV/PDF | Planeado |
 | 🔜 Modo multi-moneda (MXN, ARS, CLP, EUR...) | Planeado |
 | 🔜 Metas de ahorro | Planeado |
-| 🔜 Integración con Claude API para recomendaciones avanzadas | Futuro |
-| 🔜 Chat con IA integración con Claude API para análisis conversacional de tus finanzas  | Futuro |
+| 🔜 Chat con IA — análisis conversacional de tus finanzas | Futuro |
 
 ---
 

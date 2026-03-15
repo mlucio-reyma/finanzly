@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { useExpenses } from '../hooks/useExpenses'
+import { useAuth } from '../../auth/hooks/useAuth'
+import { ReceiptUpload } from './ReceiptUpload'
 import type { Database } from '../../../lib/database.types'
+import type { ScanResult } from '../../../types'
 
 // ── Tipos ─────────────────────────────────────────────────────────────────────
 
@@ -39,6 +42,7 @@ const DESC_MAX = 200
 
 export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
   const { createExpense, updateExpense, allCategories } = useExpenses()
+  const { user } = useAuth()
   const isEditing = !!expense
 
   // ── Estado del formulario ─────────────────────────────────────────────────
@@ -50,6 +54,19 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
   const [paymentMethod, setPaymentMethod] = useState(expense?.payment_method ?? 'efectivo')
   const [formError, setFormError]     = useState<string | null>(null)
   const [loading, setLoading]         = useState(false)
+
+  // ── Estado del escaneo de recibo ──────────────────────────────────────────
+  const [receiptUrl, setReceiptUrl]   = useState<string | null>(null)
+  const [aiPrefilled, setAiPrefilled] = useState(false)
+
+  // ── Callback cuando el escaneo completa exitosamente ─────────────────────
+  function handleScanComplete(data: ScanResult) {
+    if (data.amount !== null) setAmount(data.amount.toString())
+    if (data.date)            setDate(data.date)
+    if (data.description)     setDescription(data.description.toUpperCase())
+    if (data.establishment)   setEstablishment(data.establishment.toUpperCase())
+    setAiPrefilled(true)
+  }
 
   // ── Submit ────────────────────────────────────────────────────────────────
   async function handleSubmit(e: React.FormEvent) {
@@ -69,12 +86,14 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
       description: description.trim() || null,
       establishment: establishment.trim() || null,
       payment_method: paymentMethod,
+      ...(receiptUrl ? { receipt_url: receiptUrl } : {}),
     }
 
     setLoading(true)
     const result = isEditing
       ? await updateExpense(expense.id, formData)
-      : await createExpense(formData)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      : await createExpense(formData as any)
     setLoading(false)
 
     if (result.error) {
@@ -88,6 +107,23 @@ export function ExpenseForm({ expense, onSuccess, onCancel }: Props) {
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full" noValidate>
+
+      {/* Escaneo de recibo con IA */}
+      {!isEditing && user && (
+        <ReceiptUpload
+          userId={user.id}
+          onScanComplete={handleScanComplete}
+          onReceiptUploaded={(url) => setReceiptUrl(url)}
+          onError={() => setAiPrefilled(false)}
+        />
+      )}
+
+      {/* Banner IA */}
+      {aiPrefilled && (
+        <div className="fn-card p-3 border border-[#10B981]/30 text-sm text-[#10B981] mb-4">
+          ✨ Formulario pre-llenado por IA — revisa los datos antes de guardar
+        </div>
+      )}
 
       {/* Error general */}
       {formError && (
