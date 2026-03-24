@@ -120,3 +120,47 @@ html, body {
 .fn-animate-in {
   animation: fadeIn 0.3s ease forwards;
 }
+
+/* ── react-calendar: estructura de grilla (sin CSS propio) ───────────────────
+   Solo normalizamos el layout; el visual lo manejan Tailwind y fn-cal-tile.   */
+.react-calendar { width: 100%; }
+.react-calendar__navigation { display: none; }
+
+.react-calendar__month-view__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 2px;
+}
+.react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+  padding: 6px 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.react-calendar__month-view__weekdays__weekday abbr { text-decoration: none; }
+
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+/* Tile base: quita estilos de botón, nuestro CalendarDayCell maneja el visual */
+.fn-cal-tile {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  min-height: 60px;
+  display: block;
+}
+.fn-cal-tile abbr { display: none; }
+.fn-cal-tile:hover,
+.fn-cal-tile:focus,
+.react-calendar__tile--active,
+.react-calendar__tile--now {
+  background: none !important;
+  outline: none !important;
+}

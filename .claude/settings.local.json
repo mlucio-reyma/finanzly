@@ -17,7 +17,8 @@
       "Bash(node -e \"require\\(''c:/Desarrollo ERP/finanzly/node_modules/daisyui''\\)\")",
       "Bash(start /B npx vite --port 5174 2)",
       "Bash(1 ping -n 6 127.0.0.1 curl -s http://localhost:5174/)",
-      "Bash(npx vite build --mode development)"
+      "Bash(npx vite build --mode development)",
+      "Bash(npm install:*)"
     ],
     "additionalDirectories": [
       "c:\\Users\\migue\\.claude\\plans",

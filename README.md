@@ -76,6 +76,15 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 - **Top establecimientos**: los lugares donde más gastas, cuántas veces vas y cuánto dejas por visita
 - **Recomendaciones personalizadas**: sugerencias concretas basadas en tus patrones reales
 
+### 📅 Vista de Calendario
+Visualiza tus gastos y pagos recurrentes distribuidos en un calendario mensual. Identifica días de alto gasto, anticipa compromisos financieros y navega entre meses con caché para navegación fluida.
+
+- Montos de gastos (verde) y recurrentes (azul) por día en la grilla
+- Modal de detalle al hacer clic en cualquier día con movimientos
+- Header inteligente: total del mes o resumen de recurrentes si no hay gastos
+- Día actual resaltado visualmente con borde emerald
+- Caché local por mes — sin re-fetches al navegar hacia atrás
+
 ---
 
 ## 🛠️ Stack tecnológico
@@ -281,7 +290,8 @@ src/
 │   ├── dashboard/       # Gráficas, métricas, resumen del mes
 │   ├── recurring/       # Pagos recurrentes y recordatorios
 │   ├── analysis/        # Score, anomalías, recomendaciones
-│   └── categories/      # CRUD de categorías personalizadas
+│   ├── categories/      # CRUD de categorías personalizadas
+│   └── calendar/        # Vista de calendario mensual con gastos y recurrentes
 ├── lib/                 # Cliente de Supabase, receipt-scan (IA), utilidades
 └── types/               # TypeScript types globales, categorías, ScanResult
 ```
@@ -318,6 +328,7 @@ feature/
 | ✅ Análisis inteligente (score + anomalías + recomendaciones) | Implementado |
 | ✅ Categorías personalizadas (CRUD + emoji + color) | Implementado |
 | ✅ Escaneo de recibo con IA (Claude Vision + n8n) | Implementado |
+| ✅ Vista de Calendario (gastos + recurrentes por día) | Implementado |
 | 🔜 Recordatorios por email (Edge Functions) | Próximo |
 | 🔜 Exportar historial a CSV/PDF | Planeado |
 | 🔜 Modo multi-moneda (MXN, ARS, CLP, EUR...) | Planeado |

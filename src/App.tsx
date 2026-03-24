@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { LoginPage } from './features/auth/pages/LoginPage'
 import { RegisterPage } from './features/auth/pages/RegisterPage'
@@ -12,6 +13,16 @@ import { RecurringPage }  from './features/recurring/pages/RecurringPage'
 import { AnalysisPage }    from './features/analysis/pages/AnalysisPage'
 import { CategoriesPage }  from './features/categories/pages/CategoriesPage'
 import { ProfilePage }     from './features/profile/pages/ProfilePage'
+
+const CalendarPage = lazy(() =>
+  import('./features/calendar/pages/CalendarPage').then(m => ({ default: m.CalendarPage }))
+)
+
+const CalendarFallback = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <span className="loading loading-spinner text-[#10B981]" />
+  </div>
+)
 
 // AppLayout ya incluye Navigation internamente; Outlet renderiza la ruta hija activa.
 const PrivateLayout = () => (
@@ -46,6 +57,11 @@ function App() {
           <Route path="categories"   element={<CategoriesPage />} />
           <Route path="recurring"    element={<RecurringPage />} />
           <Route path="analysis"     element={<AnalysisPage />} />
+          <Route path="calendar"     element={
+            <Suspense fallback={<CalendarFallback />}>
+              <CalendarPage />
+            </Suspense>
+          } />
           <Route path="profile"      element={<ProfilePage />} />
         </Route>
 

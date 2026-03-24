@@ -63,6 +63,17 @@
 - `src/features/profile/**`
 - `src/components/Navigation.tsx`
 
+### Feature 009 — Vista de Calendario [PROTEGIDO]
+**Estado:** ✅ Implementado y validado
+**Archivos protegidos:**
+- `src/features/calendar/types/calendar.types.ts`
+- `src/features/calendar/hooks/useCalendarData.ts`
+- `src/features/calendar/components/CalendarHeader.tsx`
+- `src/features/calendar/components/CalendarDayCell.tsx`
+- `src/features/calendar/components/CalendarDayModal.tsx`
+- `src/features/calendar/components/CalendarLegend.tsx`
+- `src/features/calendar/pages/CalendarPage.tsx`
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)
