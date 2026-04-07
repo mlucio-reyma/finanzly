@@ -44,7 +44,7 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 - **Resumen del mes**: total gastado, promedio diario, número de transacciones
 - **Tendencia vs. mes anterior**: indicador ↑↓ con variación porcentual
 - **Donut chart**: desglose visual del top 5 categorías del mes
-- **Bar chart**: evolución de los últimos 6 meses
+- **Bar chart**: evolución de los últimos 6 meses con paleta degradada de verde (más oscuro = más reciente)
 - **Gastos recientes**: tus últimas 5 transacciones con fecha relativa
 
 ### 🔁 Pagos Recurrentes
@@ -80,10 +80,11 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 Visualiza tus gastos y pagos recurrentes distribuidos en un calendario mensual. Identifica días de alto gasto, anticipa compromisos financieros y navega entre meses con caché para navegación fluida.
 
 - Montos de gastos (verde) y recurrentes (azul) por día en la grilla
-- Modal de detalle al hacer clic en cualquier día con movimientos
+- Modal de detalle al hacer clic en cualquier día con movimientos (gastos + badge Pagado/Pendiente en recurrentes)
 - Header inteligente: total del mes o resumen de recurrentes si no hay gastos
 - Día actual resaltado visualmente con borde emerald
 - Caché local por mes — sin re-fetches al navegar hacia atrás
+- **Acceso rápido en móvil**: ícono de calendario en el header superior abre un bottom sheet flotante sin salir de la pantalla actual — comportamiento modal completo (bloquea interacción con el fondo hasta cerrar)
 
 ---
 

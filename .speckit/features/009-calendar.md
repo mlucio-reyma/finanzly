@@ -81,16 +81,17 @@ Vista de calendario mensual que distribuye los gastos y pagos recurrentes del us
 ```
 src/features/calendar/
   types/
-    calendar.types.ts         # ExpenseEntry, RecurrentEntry, DayData, CalendarDataMap
+    calendar.types.ts            # ExpenseEntry, RecurrentEntry, DayData, CalendarDataMap
   hooks/
-    useCalendarData.ts        # 3 queries en paralelo + caché por mes en useRef
+    useCalendarData.ts           # 3 queries en paralelo + caché por mes en useRef
   components/
-    CalendarHeader.tsx        # Navegación mensual + totales condicionales
-    CalendarDayCell.tsx       # Celda con número, montos y dots
-    CalendarDayModal.tsx      # Modal de detalle del día
-    CalendarLegend.tsx        # Leyenda ● Gastos ● Recurrentes
+    CalendarHeader.tsx           # Navegación mensual + totales condicionales
+    CalendarDayCell.tsx          # Celda con número, montos y dots
+    CalendarDayModal.tsx         # Modal de detalle del día
+    CalendarLegend.tsx           # Leyenda ● Gastos ● Recurrentes
+    CalendarFloatingPanel.tsx    # Panel flotante (bottom sheet) para acceso desde header móvil
   pages/
-    CalendarPage.tsx          # Ensamblado con lazy loading
+    CalendarPage.tsx             # Vista completa — usada en desktop vía /calendar
 ```
 
 ### Queries de Supabase
@@ -110,7 +111,16 @@ recurring_payments_log: paid_month = primer día del mes (para isPaid)
 - Día actual: fondo bg-emerald-500/20 + borde border-[#10B981]
 - Días de mes anterior/siguiente: opacity-30
 - Header inteligente con 4 estados de visualización
-- Modal con animación fn-animate-in, cierre por overlay
+- Modal de día con animación fn-animate-in, cierre por overlay
+
+### Acceso móvil — Panel flotante (bottom sheet)
+- Ícono de calendario en el header superior mobile, a la izquierda del avatar del usuario
+- Abre un bottom sheet (`rounded-t-2xl`, backdrop `bg-black/60`)
+- Comportamiento modal: bloquea scroll del body (`document.body.style.overflow = 'hidden'`) mientras está abierto; se restaura al cerrar via cleanup de `useEffect`
+- `role="dialog"` + `aria-modal="true"` para semántica correcta
+- Cierre por tap en el backdrop o botón ✕
+- El ítem "Calendario" fue eliminado del bottom nav móvil (5 ítems restantes); el sidebar desktop mantiene el enlace a `/calendar`
+- `CalendarDayModal` se renderiza dentro del mismo contexto `z-[60]` del panel flotante
 
 ---
 
@@ -120,3 +130,4 @@ recurring_payments_log: paid_month = primer día del mes (para isPaid)
 - `active` es el campo correcto (no `is_active`)
 - `new Date(\`${day}T12:00:00\`)` para evitar desfases de zona horaria en el modal
 - El caché usa `useRef` para no generar re-renders ni loops de dependencias
+- Panel flotante en `z-[60]`; el header mobile está en `z-50` — sin conflictos

@@ -1,7 +1,8 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth/hooks/useAuth'
 import { useProfile } from '../features/profile/hooks/useProfile'
+import { CalendarFloatingPanel } from '../features/calendar/components/CalendarFloatingPanel'
 
 // ── Iconos SVG ─────────────────────────────────────────────────────────────────
 
@@ -52,26 +53,44 @@ function MobileUserButton({ onClick }: { onClick: () => void }) {
 // ── Navigation ─────────────────────────────────────────────────────────────────
 
 export default function Navigation() {
-  const { signOut }  = useAuth()
-  const navigate     = useNavigate()
-  const { pathname } = useLocation()
+  const { signOut }        = useAuth()
+  const navigate           = useNavigate()
+  const { pathname }       = useLocation()
+  const [calendarOpen, setCalendarOpen] = useState(false)
 
   async function handleLogout() {
     await signOut()
     navigate('/login')
   }
 
+  // Ítems del bottom nav móvil — excluye Calendario (accesible desde el header)
+  const mobileNavItems = NAV_ITEMS.filter(item => item.href !== '/calendar')
+
   return (
     <>
       {/* ── Navbar superior (solo móvil) ─────────────────────────────────── */}
       <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-14 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#10B981]/10 flex items-center justify-between px-4">
         <span className="font-bold text-lg text-[#10B981]">Finanzly</span>
-        <MobileUserButton onClick={() => navigate('/profile')} />
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setCalendarOpen(true)}
+            aria-label="Abrir calendario"
+            className="btn btn-ghost btn-sm btn-square text-[#94A3B8] hover:text-[#10B981]"
+          >
+            <IconCalendar />
+          </button>
+          <MobileUserButton onClick={() => navigate('/profile')} />
+        </div>
       </header>
+
+      {/* ── Panel flotante de calendario (solo móvil) ────────────────────── */}
+      {calendarOpen && (
+        <CalendarFloatingPanel onClose={() => setCalendarOpen(false)} />
+      )}
 
       {/* ── Barra inferior (solo móvil) ──────────────────────────────────── */}
       <nav aria-label="Navegación principal" className="lg:hidden fixed bottom-0 inset-x-0 z-50 fn-bottom-nav flex">
-        {NAV_ITEMS.map(({ href, label, Icon }) => {
+        {mobileNavItems.map(({ href, label, Icon }) => {
           const active = pathname === href
           return (
             <button

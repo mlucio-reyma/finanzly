@@ -1,7 +1,7 @@
 # Finanzly — Especificación General del Producto
 
 > **Fuente de verdad del producto.** Este documento define qué construimos y por qué.
-> Última actualización: 2026-03
+> Última actualización: 2026-04
 
 ---
 
@@ -176,6 +176,27 @@ Gestión del perfil personal: nombre, avatar y moneda preferida.
 
 ---
 
+### Feature 009 — Vista de Calendario
+**Estado:** ✅ Implementado
+
+Distribución visual de gastos y pagos recurrentes en una grilla mensual navegable.
+
+**Historias de usuario:**
+- Como usuario, quiero ver mis gastos organizados en un calendario mensual para identificar días de mayor gasto.
+- Como usuario, quiero ver mis pagos recurrentes en su día de vencimiento para anticipar compromisos financieros.
+- Como usuario, quiero hacer clic en un día para ver el detalle de sus movimientos.
+- Como usuario móvil, quiero acceder al calendario desde el header superior sin abandonar la pantalla actual.
+
+**Criterios clave:**
+- Grilla 7×5 con gastos en verde (#10B981) y recurrentes en azul (#3B82F6)
+- Dots indicadores por tipo en cada celda; día actual resaltado con borde emerald
+- Modal de detalle por día con secciones de gastos y recurrentes (badge Pagado/Pendiente)
+- Caché en memoria por mes (`useRef`) — sin re-fetches al navegar entre meses
+- **Acceso móvil**: ícono en el header superior abre un bottom sheet modal (bloquea scroll del body, `z-[60]`)
+- Calendario eliminado del bottom nav móvil; sidebar desktop mantiene el enlace a `/calendar`
+
+---
+
 ## 🚀 Despliegue
 
 | Entorno | URL | Plataforma |
@@ -200,3 +221,4 @@ Gestión del perfil personal: nombre, avatar y moneda preferida.
 | 7–8 | Feature 005 Análisis Inteligente | ~25 hrs | ✅ |
 | 9 | Feature 006 Categorías CRUD | ~6 hrs | ✅ |
 | 10 | Feature 007 Perfil de Usuario | ~4 hrs | ✅ |
+| 11 | Feature 009 Vista de Calendario | ~10 hrs | ✅ |

@@ -6,11 +6,8 @@ import { useDashboardData } from '../hooks/useDashboardData'
 
 // ── Constantes ────────────────────────────────────────────────────────────────
 
-// Clave del mes actual en formato "YYYY-MM" para distinguir la barra activa
-const CURRENT_MONTH = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
-
-const COLOR_CURRENT = '#10B981' // emerald — mes actual
-const COLOR_OTHER   = '#1E293B' // navy   — meses anteriores
+// Paleta de 6 colores: índice 0 = más antiguo, índice 5 = mes actual
+const MONTH_COLORS = ['#e0f4e9', '#c0e9d4', '#9fddbe', '#7cd1aa', '#54c595', '#10b981']
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -81,10 +78,10 @@ export function MonthlyBarChart() {
         <Tooltip content={<CustomTooltip />} cursor={{ fill: 'oklch(var(--b2) / 0.5)' }} />
 
         <Bar dataKey="total" radius={[4, 4, 0, 0]}>
-          {data.map(entry => (
+          {data.map((entry, i) => (
             <Cell
               key={entry.key}
-              fill={entry.key === CURRENT_MONTH ? COLOR_CURRENT : COLOR_OTHER}
+              fill={MONTH_COLORS[i] ?? '#10b981'}
             />
           ))}
         </Bar>
