@@ -74,6 +74,27 @@
 - `src/features/calendar/components/CalendarLegend.tsx`
 - `src/features/calendar/pages/CalendarPage.tsx`
 
+### Feature 010: Chat con IA Financiera
+
+**Ubicación:** `src/features/chat/`, `src/lib/ai-chat.ts`
+
+**Archivos protegidos:**
+- `src/lib/ai-chat.ts` - Cliente de API para n8n webhook
+- `src/features/chat/types.ts` - Tipos TypeScript del chat
+- `src/features/chat/hooks/useChatContext.ts` - Hook para obtener contexto financiero
+- `src/features/chat/hooks/useChat.ts` - Hook principal del chat
+- `src/features/chat/components/Message.tsx` - Componente de mensaje
+- `src/features/chat/components/TypingIndicator.tsx` - Indicador de escritura
+- `src/features/chat/components/QuickActions.tsx` - Sugerencias rápidas
+- `src/features/chat/components/ChatDrawer.tsx` - Panel lateral del chat
+- `src/features/chat/components/ChatWidget.tsx` - Botón flotante (deprecado)
+
+**Modificados:**
+- `src/components/Navigation.tsx` - Añadido ícono de chat en header y estado del drawer
+- `.env.local` - Variable VITE_N8N_WEBHOOK_CHAT
+
+**Razón:** Feature completo de chat con IA financiera. No modificar sin revisar spec en `.speckit/features/010-chat-ai.md`
+
 ---
 
 ## 📋 Template (copiar al completar cada feature)

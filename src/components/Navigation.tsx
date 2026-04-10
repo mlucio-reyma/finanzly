@@ -1,8 +1,10 @@
 import { useState, type ReactNode } from 'react'
+import { MessageCircle } from 'lucide-react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../features/auth/hooks/useAuth'
 import { useProfile } from '../features/profile/hooks/useProfile'
 import { CalendarFloatingPanel } from '../features/calendar/components/CalendarFloatingPanel'
+import { ChatDrawer } from '../features/chat/components/ChatDrawer'
 
 // ── Iconos SVG ─────────────────────────────────────────────────────────────────
 
@@ -57,6 +59,7 @@ export default function Navigation() {
   const navigate           = useNavigate()
   const { pathname }       = useLocation()
   const [calendarOpen, setCalendarOpen] = useState(false)
+  const [chatOpen, setChatOpen]         = useState(false)
 
   async function handleLogout() {
     await signOut()
@@ -70,7 +73,16 @@ export default function Navigation() {
     <>
       {/* ── Navbar superior (solo móvil) ─────────────────────────────────── */}
       <header className="lg:hidden fixed top-0 inset-x-0 z-50 h-14 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#10B981]/10 flex items-center justify-between px-4">
-        <span className="font-bold text-lg text-[#10B981]">Finanzly</span>
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-lg text-[#10B981]">Finanzly</span>
+          <button
+            onClick={() => setChatOpen(true)}
+            aria-label="Abrir chat financiero"
+            className="btn btn-ghost btn-sm btn-square text-[#94A3B8] hover:text-[#10B981]"
+          >
+            <MessageCircle className="w-5 h-5" />
+          </button>
+        </div>
         <div className="flex items-center gap-1">
           <button
             onClick={() => setCalendarOpen(true)}
@@ -111,8 +123,15 @@ export default function Navigation() {
 
       {/* ── Sidebar (solo desktop) ───────────────────────────────────────── */}
       <aside className="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-64 fn-sidebar z-40">
-        <div className="px-6 py-6 shrink-0">
+        <div className="px-6 py-6 shrink-0 flex items-center justify-between">
           <span className="font-bold text-2xl text-[#10B981]">Finanzly</span>
+          <button
+            onClick={() => setChatOpen(true)}
+            aria-label="Abrir chat financiero"
+            className="text-[#94A3B8] hover:text-[#10B981] transition-colors"
+          >
+            <MessageCircle className="w-6 h-6" />
+          </button>
         </div>
 
         <nav aria-label="Navegación principal" className="flex-1 flex flex-col gap-1 px-3 overflow-y-auto">
@@ -161,6 +180,9 @@ export default function Navigation() {
           </button>
         </div>
       </aside>
+
+      {/* ── ChatDrawer — renderizado una sola vez, fuera de cualquier contenedor con overflow ── */}
+      <ChatDrawer isOpen={chatOpen} onClose={() => setChatOpen(false)} />
     </>
   )
 }

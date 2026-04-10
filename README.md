@@ -76,6 +76,24 @@ Finanzly es una aplicación web progresiva (PWA) para el control de finanzas per
 - **Top establecimientos**: los lugares donde más gastas, cuántas veces vas y cuánto dejas por visita
 - **Recomendaciones personalizadas**: sugerencias concretas basadas en tus patrones reales
 
+### 💬 Chat con IA Financiera
+
+Asistente inteligente que responde preguntas sobre tus finanzas personales usando IA.
+
+**Características:**
+- Respuestas personalizadas basadas en tus gastos reales
+- Análisis por categoría y comparaciones mensuales
+- Recomendaciones accionables para mejorar finanzas
+- Conversaciones naturales en español de México
+- Interfaz responsive (móvil y desktop)
+- Powered by Groq (Llama 3.3 70B)
+
+**Tech Stack:**
+- Frontend: React + TypeScript + Tailwind CSS
+- Orquestación: n8n workflow
+- IA: Groq API (gratuita)
+- Base de datos: Supabase con RLS
+
 ### 📅 Vista de Calendario
 Visualiza tus gastos y pagos recurrentes distribuidos en un calendario mensual. Identifica días de alto gasto, anticipa compromisos financieros y navega entre meses con caché para navegación fluida.
 
@@ -334,7 +352,7 @@ feature/
 | 🔜 Exportar historial a CSV/PDF | Planeado |
 | 🔜 Modo multi-moneda (MXN, ARS, CLP, EUR...) | Planeado |
 | 🔜 Metas de ahorro | Planeado |
-| 🔜 Chat con IA — análisis conversacional de tus finanzas | Futuro |
+| ✅ Chat con IA — análisis conversacional de tus finanzas | Implementado |
 
 ---
 
